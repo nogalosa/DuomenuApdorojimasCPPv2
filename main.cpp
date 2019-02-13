@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <cassert>
 #include <vector>
@@ -43,8 +44,29 @@ studentas getUserInfo() {
     return stud;
 }
 
-int main() {
+void showResults(std::vector<studentas> users) {
+    int longestName = 0, longestSurname = 0;
+    for (int i = 0; i < users.size(); i++) {
+        if(users[i].name.size() > longestName)
+            longestName = users[i].name.size();
+        if(users[i].surname.size() > longestSurname)
+            longestSurname = users[i].surname.size();
+    }
+    if(longestSurname < 7)
+        longestSurname = 7;
+    if(longestName < 6)
+        longestName = 6;
+    std::cout << "Pavarde" << std::string(longestSurname - 6, ' ') << "Vardas" << std::string(longestName - 5, ' ');
+    std::cout << "Galutinis (Vid.)" << std::endl;
+    std::cout << "--------------------------------------------------" << std::endl;
+    for(int i = 0; i < users.size(); i++){
+        std::cout << users[i].surname << std::string(longestSurname - users[i].surname.size() + 1, ' ') << users[i].name << std::string(longestSurname - users[i].name.size() + 1, ' ');
+        std::cout << std::endl;
+    }
 
+}
+
+int main() {
     std::vector<studentas> users;
     int selection = 1;
     while(selection == 1){
@@ -52,12 +74,17 @@ int main() {
         std::cout << "1. Ivesti nauja studenta;" << std::endl;
         std::cout << "2. Suskaiciuoti galutinius balus;" << std::endl;
         std::cin >> selection;
-        if(selection == 1){
-            users.push_back(getUserInfo());
-        }
-        if(selection != 1 && selection != 2){
-            std::cout << "Ivestas neteisingas pasirinkimas" << std::endl << std::endl;
-            selection = 1;
+        switch(selection) {
+            case 1:
+                users.push_back(getUserInfo());
+                break;
+            case 2:
+                showResults(users);
+                break;
+            default:
+                std::cout << "Ivestas neteisingas pasirinkimas" << std::endl << std::endl;
+                selection = 1;
+                break;
         }
     }
 
