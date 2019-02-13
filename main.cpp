@@ -59,8 +59,15 @@ void showResults(std::vector<studentas> users) {
     std::cout << "Pavarde" << std::string(longestSurname - 6, ' ') << "Vardas" << std::string(longestName - 5, ' ');
     std::cout << "Galutinis (Vid.)" << std::endl;
     std::cout << "--------------------------------------------------" << std::endl;
+    double galutinis = 0;
+    int suma = 0;
     for(int i = 0; i < users.size(); i++){
         std::cout << users[i].surname << std::string(longestSurname - users[i].surname.size() + 1, ' ') << users[i].name << std::string(longestSurname - users[i].name.size() + 1, ' ');
+        for(int j = 0; j < users[i].nd.size(); j++){
+            suma += users[i].nd[j];
+        }
+        galutinis = ((double)suma / (double)users[i].nd.size()) * 0.4 + 0.6 * (double) users[i].egz;
+        std::cout << std::setprecision(2) << std::fixed << galutinis;
         std::cout << std::endl;
     }
 
