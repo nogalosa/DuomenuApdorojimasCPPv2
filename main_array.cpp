@@ -7,15 +7,15 @@
 
 struct studentas {
     std::string name, surname;
-    int egz;
-    std::vector<int> nd;
+    int egz, n;
+    int nd[100000];
 };
 
 void asort(std::vector<studentas> users) {
     int i, j, k;
     for (i = 0; i < users.size(); i ++)
-        for (j = 0; j < users[i].nd.size()-1; j++)
-            for (k = 0; k < users[i].nd.size()-j-1; k++)
+        for (j = 0; j < users[i].n-1; j++)
+            for (k = 0; k < users[i].n-j-1; k++)
                 if (users[i].nd[k] > users[i].nd[k+1])
                     std::swap(users[i].nd[k],users[i].nd[k+1]);
 }
@@ -37,14 +37,18 @@ studentas getUserInfo() {
 
     int tempn = 1;
 
+    int n = 0;
     while(tempn != 0){
         std::cin >> tempn;
-        if(tempn > 0 && tempn < 11)
-            stud.nd.push_back(tempn);
-        else if(tempn > 10 || tempn < 0)
+        if(tempn > 0 && tempn < 11) {
+            stud.nd[n] = tempn;
+            n++;
+        } else if(tempn > 10 || tempn < 0)
             std::cout << std::endl << "Ivesta neteisinga reiksme. Galite testi rezultatu pildyma arba iveskite 0, jei norite baigti.";
         std::cout << std::endl;
     }
+
+    stud.n = n;
 
     std::cout << "Iveskite egzamino rezultata: ";
     std::cin >> egz;
@@ -79,16 +83,16 @@ void showResults(std::vector<studentas> users, bool median) {
         if(median) {
             asort(users);
             if(users.size() % 2 == 0){
-                imedian = (double)(users[i].nd[users[i].nd.size()/2] + users[i].nd[users[i].nd.size()/2-1])/2;
+                imedian = (double)(users[i].nd[users[i].n/2] + users[i].nd[users[i].n/2-1])/2;
             } else {
-                imedian = floor((double)users[i].nd[users[i].nd.size()/2]);
+                imedian = floor((double)users[i].nd[users[i].n/2]);
             }
             galutinis = imedian * 0.4 + 0.6 * (double) users[i].egz;
         } else {
-            for(int j = 0; j < users[i].nd.size(); j++){
+            for(int j = 0; j < users[i].n; j++){
                 suma += users[i].nd[j];
             }
-            galutinis = ((double) suma / (double) users[i].nd.size()) * 0.4 + 0.6 * (double) users[i].egz;
+            galutinis = ((double) suma / (double) users[i].n) * 0.4 + 0.6 * (double) users[i].egz;
         }
 
         std::cout << std::setprecision(2) << std::fixed << galutinis;
