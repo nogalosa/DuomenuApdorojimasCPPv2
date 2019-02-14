@@ -98,6 +98,22 @@ void showResults(std::vector<studentas> users, bool median) {
 
 }
 
+std::vector<studentas> regenerateResults(std::vector<studentas> users) {
+    srand(time(NULL));
+    for(int i = 0; i < users.size(); i++){
+        for(int j = 0; j < users[i].nd.size(); j++) {
+            users[i].nd[j] = 1 + (rand() % 10);
+        }
+    }
+    return users;
+}
+
+std::vector<studentas> loadStudents(std::vector<studentas> users) {
+    //TODO: load file
+
+    return users;
+}
+
 int main() {
     std::vector<studentas> users;
     int selection = 1;
@@ -106,6 +122,8 @@ int main() {
         std::cout << "1. Ivesti nauja studenta;" << std::endl;
         std::cout << "2. Suskaiciuoti galutinius balus (su vidurkiu);" << std::endl;
         std::cout << "3. Suskaiciuoti galutinius balus (su mediana);" << std::endl;
+        std::cout << "4. Pergeneruoti visu ivestu studentu namu darbu balus i atsitiktinius;" << std::endl;
+        std::cout << "5. Ivesti studentu informacija is studentai.txt failo;" << std::endl;
         std::cin >> selection;
         switch(selection) {
             case 1:
@@ -116,6 +134,13 @@ int main() {
                 break;
             case 3:
                 showResults(users,true);
+                break;
+            case 4:
+                users = regenerateResults(users);
+                selection = 1;
+                break;
+            case 5:
+                users = loadStudents(users);
                 break;
             default:
                 std::cout << "Ivestas neteisingas pasirinkimas" << std::endl << std::endl;
