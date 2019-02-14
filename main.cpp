@@ -3,12 +3,22 @@
 #include <string>
 #include <cassert>
 #include <vector>
+#include <stdio.h>
 
 struct studentas {
     std::string name, surname;
     int n, egz;
     std::vector<int> nd;
 };
+
+void asort(std::vector<studentas> users) {
+    int i, j, k;
+    for (i = 0; i < users.size(); i ++)
+        for (j = 0; j < users[i].nd.size()-1; j++)
+            for (k = 0; k < users[i].nd.size()-j-1; k++)
+                if (users[i].nd[k] > users[i].nd[k+1])
+                    std::swap(users[i].nd[k],users[i].nd[k+1]);
+}
 
 studentas getUserInfo() {
     studentas stud;
@@ -45,7 +55,7 @@ studentas getUserInfo() {
     return stud;
 }
 
-void showResults(std::vector<studentas> users) {
+void showResults(std::vector<studentas> users, bool median) {
     int longestName = 0, longestSurname = 0;
     for (int i = 0; i < users.size(); i++) {
         if(users[i].name.size() > longestName)
@@ -60,15 +70,27 @@ void showResults(std::vector<studentas> users) {
     std::cout << "Pavarde" << std::string(longestSurname - 6, ' ') << "Vardas" << std::string(longestName - 5, ' ');
     std::cout << "Galutinis (Vid.)" << std::endl;
     std::cout << "--------------------------------------------------" << std::endl;
-    double galutinis = 0;
-    int suma = 0;
+    double galutinis = 0,imedian = 0;
+    int suma = 0 ;
     for(int i = 0; i < users.size(); i++){
         suma = 0;
         std::cout << users[i].surname << std::string(longestSurname - users[i].surname.size() + 1, ' ') << users[i].name << std::string(longestName - users[i].name.size() + 1, ' ');
-        for(int j = 0; j < users[i].nd.size(); j++){
-            suma += users[i].nd[j];
+
+        if(median) {
+            asort(users);
+            if(users.size() % 2 == 0){
+                imedian = (double)(users[i].nd[users[i].nd.size()/2] + users[i].nd[users[i].nd.size()/2-1])/2;
+            } else {
+                imedian = floor((double)users[i].nd[users[i].nd.size()/2]);
+            }
+            galutinis = imedian * 0.4 + 0.6 * (double) users[i].egz;
+        } else {
+            for(int j = 0; j < users[i].nd.size(); j++){
+                suma += users[i].nd[j];
+            }
+            galutinis = ((double) suma / (double) users[i].nd.size()) * 0.4 + 0.6 * (double) users[i].egz;
         }
-        galutinis = ((double)suma / (double)users[i].nd.size()) * 0.4 + 0.6 * (double) users[i].egz;
+
         std::cout << std::setprecision(2) << std::fixed << galutinis;
 //        std::cout << suma << " < " << users[i].nd.size() << " < " << users[i].egz << " < " << galutinis;
         std::cout << std::endl;
@@ -82,14 +104,18 @@ int main() {
     while(selection == 1){
         std::cout << "Ivesta " << users.size() << " stud. Pasirinkite:" << std::endl;
         std::cout << "1. Ivesti nauja studenta;" << std::endl;
-        std::cout << "2. Suskaiciuoti galutinius balus;" << std::endl;
+        std::cout << "2. Suskaiciuoti galutinius balus (su vidurkiu);" << std::endl;
+        std::cout << "3. Suskaiciuoti galutinius balus (su mediana);" << std::endl;
         std::cin >> selection;
         switch(selection) {
             case 1:
                 users.push_back(getUserInfo());
                 break;
             case 2:
-                showResults(users);
+                showResults(users,false);
+                break;
+            case 3:
+                showResults(users,true);
                 break;
             default:
                 std::cout << "Ivestas neteisingas pasirinkimas" << std::endl << std::endl;
