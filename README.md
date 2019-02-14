@@ -1,4 +1,5 @@
-__Duomenu Apdorojimas__
+Duomenu Apdorojimas
+===================
 
 [![Commit activity](https://img.shields.io/github/commit-activity/m/nogalosa/DuomenuApdorojimasCPP.svg)](https://github.com/nogalosa/DuomenuApdorojimasCPP/commits/master)
 [![Last commit](https://img.shields.io/github/last-commit/nogalosa/DuomenuApdorojimasCPP.svg)](https://github.com/nogalosa/DuomenuApdorojimasCPP/commits/master)
