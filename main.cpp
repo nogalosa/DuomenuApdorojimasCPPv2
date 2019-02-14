@@ -38,6 +38,7 @@ studentas getUserInfo() {
 
     std::cout << "Iveskite egzamino rezultata: ";
     std::cin >> egz;
+    stud.egz = egz;
 
     std::cout << "Ivedimas baigtas" << std::endl << std::endl;
 
@@ -62,12 +63,14 @@ void showResults(std::vector<studentas> users) {
     double galutinis = 0;
     int suma = 0;
     for(int i = 0; i < users.size(); i++){
-        std::cout << users[i].surname << std::string(longestSurname - users[i].surname.size() + 1, ' ') << users[i].name << std::string(longestSurname - users[i].name.size() + 1, ' ');
+        suma = 0;
+        std::cout << users[i].surname << std::string(longestSurname - users[i].surname.size() + 1, ' ') << users[i].name << std::string(longestName - users[i].name.size() + 1, ' ');
         for(int j = 0; j < users[i].nd.size(); j++){
             suma += users[i].nd[j];
         }
         galutinis = ((double)suma / (double)users[i].nd.size()) * 0.4 + 0.6 * (double) users[i].egz;
         std::cout << std::setprecision(2) << std::fixed << galutinis;
+//        std::cout << suma << " < " << users[i].nd.size() << " < " << users[i].egz << " < " << galutinis;
         std::cout << std::endl;
     }
 
