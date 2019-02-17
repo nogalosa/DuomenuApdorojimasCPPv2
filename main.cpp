@@ -13,13 +13,14 @@ struct studentas {
     std::vector<int> nd;
 };
 
-void sortByNd(std::vector<studentas> users) {
+std::vector<studentas> sortByNd(std::vector<studentas> users) {
     int i, j, k;
     for (i = 0; i < users.size(); i++)
         for (j = 0; j < users[i].nd.size()-1; j++)
             for (k = 0; k < users[i].nd.size()-j-1; k++)
                 if (users[i].nd[k] > users[i].nd[k+1])
                     std::swap(users[i].nd[k],users[i].nd[k+1]);
+    return users;
 }
 std::vector<studentas> sortByName(std::vector<studentas> users) {
     std::sort(std::begin(users), std::end(users), [](const studentas &a1, const studentas &a2 ){
@@ -85,7 +86,7 @@ void showResults(std::vector<studentas> users, bool median) {
         std::cout << users[i].surname << std::string(longestSurname - users[i].surname.size() + 1, ' ') << users[i].name << std::string(longestName - users[i].name.size() + 1, ' ');
 
         if(median) {
-            sortByNd(users);
+            users = sortByNd(users);
             if(users.size() % 2 == 0){
                 imedian = (double)(users[i].nd[users[i].nd.size()/2] + users[i].nd[users[i].nd.size()/2-1])/2;
             } else {
