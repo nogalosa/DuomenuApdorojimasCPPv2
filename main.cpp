@@ -122,8 +122,7 @@ int main() {
         std::cout << "1. Ivesti nauja studenta;" << std::endl;
         std::cout << "2. Suskaiciuoti galutinius balus (su vidurkiu);" << std::endl;
         std::cout << "3. Suskaiciuoti galutinius balus (su mediana);" << std::endl;
-        std::cout << "4. Pergeneruoti visu ivestu studentu namu darbu balus i atsitiktinius;" << std::endl;
-        std::cout << "5. Ivesti studentu informacija is studentai.txt failo;" << std::endl;
+        std::cout << "4. Pergeneruoti visu ivestu studentu namu darbu balus i atsitiktinius;" << std::endl
         std::cin >> selection;
         switch(selection) {
             case 1:
