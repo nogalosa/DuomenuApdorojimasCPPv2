@@ -11,7 +11,7 @@ struct studentas {
     int nd[100000];
 };
 
-void asort(std::vector<studentas> users) {
+void sortByNd(std::vector<studentas> users) {
     int i, j, k;
     for (i = 0; i < users.size(); i ++)
         for (j = 0; j < users[i].n-1; j++)
@@ -81,7 +81,7 @@ void showResults(std::vector<studentas> users, bool median) {
         std::cout << users[i].surname << std::string(longestSurname - users[i].surname.size() + 1, ' ') << users[i].name << std::string(longestName - users[i].name.size() + 1, ' ');
 
         if(median) {
-            asort(users);
+            sortByNd(users);
             if(users.size() % 2 == 0){
                 imedian = (double)(users[i].nd[users[i].n/2] + users[i].nd[users[i].n/2-1])/2;
             } else {

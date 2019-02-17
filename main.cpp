@@ -5,6 +5,7 @@
 #include <vector>
 #include <stdio.h>
 #include <fstream>
+#include <algorithm>
 
 struct studentas {
     std::string name, surname;
@@ -12,13 +13,19 @@ struct studentas {
     std::vector<int> nd;
 };
 
-void asort(std::vector<studentas> users) {
+void sortByNd(std::vector<studentas> users) {
     int i, j, k;
-    for (i = 0; i < users.size(); i ++)
+    for (i = 0; i < users.size(); i++)
         for (j = 0; j < users[i].nd.size()-1; j++)
             for (k = 0; k < users[i].nd.size()-j-1; k++)
                 if (users[i].nd[k] > users[i].nd[k+1])
                     std::swap(users[i].nd[k],users[i].nd[k+1]);
+}
+std::vector<studentas> sortByName(std::vector<studentas> users) {
+    std::sort(std::begin(users), std::end(users), [](const studentas &a1, const studentas &a2 ){
+        return a1.name.compare(a2.name) < 0;
+    });
+    return users;
 }
 
 studentas getUserInfo() {
@@ -78,7 +85,7 @@ void showResults(std::vector<studentas> users, bool median) {
         std::cout << users[i].surname << std::string(longestSurname - users[i].surname.size() + 1, ' ') << users[i].name << std::string(longestName - users[i].name.size() + 1, ' ');
 
         if(median) {
-            asort(users);
+            sortByNd(users);
             if(users.size() % 2 == 0){
                 imedian = (double)(users[i].nd[users[i].nd.size()/2] + users[i].nd[users[i].nd.size()/2-1])/2;
             } else {
@@ -125,8 +132,8 @@ std::vector<studentas> loadStudents(std::vector<studentas> users) {
             }
         } else {
             studentas stud;
-            stud.name = entry;
-            inf >> stud.surname;
+            stud.surname = entry;
+            inf >> stud.name;
             for(int i = 0; i < ndcount; i++){
                 inf >> tempnd;
                 stud.nd.push_back(tempnd);
@@ -155,10 +162,10 @@ int main() {
                 users.push_back(getUserInfo());
                 break;
             case 2:
-                showResults(users,false);
+                showResults(sortByName(users),false);
                 break;
             case 3:
-                showResults(users,true);
+                showResults(sortByName(users),true);
                 break;
             case 4:
                 users = regenerateResults(users);
