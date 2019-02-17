@@ -4,6 +4,7 @@
 #include <cassert>
 #include <vector>
 #include <stdio.h>
+#include <fstream>
 
 struct studentas {
     std::string name, surname;
@@ -109,7 +110,31 @@ std::vector<studentas> regenerateResults(std::vector<studentas> users) {
 }
 
 std::vector<studentas> loadStudents(std::vector<studentas> users) {
-    //TODO: load file
+    std::ifstream inf("kursiokai.txt");
+
+    bool start = true;
+    std::string entry;
+    int ndcount = 0, tempnd = 0;
+    while(inf >> entry) {
+        if (start) {
+            if (entry.find("ND") == 0) {
+                ndcount++;
+            }
+            if (entry == "Egzaminas") {
+                start = false;
+            }
+        } else {
+            studentas stud;
+            stud.name = entry;
+            inf >> stud.surname;
+            for(int i = 0; i < ndcount; i++){
+                inf >> tempnd;
+                stud.nd.push_back(tempnd);
+            }
+            inf >> stud.egz;
+            users.push_back(stud);
+        }
+    }
 
     return users;
 }
@@ -123,6 +148,7 @@ int main() {
         std::cout << "2. Suskaiciuoti galutinius balus (su vidurkiu);" << std::endl;
         std::cout << "3. Suskaiciuoti galutinius balus (su mediana);" << std::endl;
         std::cout << "4. Pergeneruoti visu ivestu studentu namu darbu balus i atsitiktinius;" << std::endl;
+        std::cout << "5. Ivesti studentu informacija is kursiokai.txt failo;" << std::endl;
         std::cin >> selection;
         switch(selection) {
             case 1:
@@ -140,6 +166,7 @@ int main() {
                 break;
             case 5:
                 users = loadStudents(users);
+                selection = 1;
                 break;
             default:
                 std::cout << "Ivestas neteisingas pasirinkimas" << std::endl << std::endl;
