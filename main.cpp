@@ -1,17 +1,4 @@
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <cassert>
-#include <vector>
-#include <stdio.h>
-#include <fstream>
-#include <algorithm>
-
-struct studentas {
-    std::string name, surname;
-    int egz;
-    std::vector<int> nd;
-};
+#include "main.h"
 
 std::vector<studentas> sortByNd(std::vector<studentas> users) {
     int i, j, k;
