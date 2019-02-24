@@ -20,6 +20,7 @@ struct studentas {
     std::vector<int> nd;
 };
 
+void checkInput();
 std::vector<studentas> sortByNd(std::vector<studentas> users);
 std::vector<studentas> sortByName(std::vector<studentas> users);
 studentas getUserInfo();

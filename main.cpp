@@ -1,5 +1,12 @@
 #include "main.h"
 
+void checkInput(){
+    if(!std::cin.good()){
+        std::cin.clear();
+        std::cin.ignore(INT_MAX,'\n');
+    }
+}
+
 std::vector<studentas> sortByNd(std::vector<studentas> users) {
     int i, j, k;
     for (i = 0; i < users.size(); i++)
@@ -35,15 +42,26 @@ studentas getUserInfo() {
 
     while(tempn != 0){
         std::cin >> tempn;
+        checkInput();
         if(tempn > 0 && tempn < 11)
             stud.nd.push_back(tempn);
         else if(tempn > 10 || tempn < 0)
             std::cout << std::endl << "Ivesta neteisinga reiksme. Galite testi rezultatu pildyma arba iveskite 0, jei norite baigti.";
         std::cout << std::endl;
     }
+    if(stud.nd.size() == 0){
+        std::cout << "Neivesta jokia namu darbu reiksme. Ivedama nustatyta reiksme: 1" << std::endl;
+        stud.nd.push_back(1);
+    }
 
     std::cout << "Iveskite egzamino rezultata: ";
     std::cin >> egz;
+    checkInput();
+    while(egz < 1 || egz > 10){
+        std::cout << std::endl << "Ivesta neteisinga reiksme. Iveskite egzamino rezultata: ";
+        std::cin >> egz;
+        checkInput();
+    }
     stud.egz = egz;
 
     std::cout << "Ivedimas baigtas" << std::endl << std::endl;
@@ -105,30 +123,42 @@ std::vector<studentas> regenerateResults(std::vector<studentas> users) {
 }
 
 std::vector<studentas> loadStudents(std::vector<studentas> users) {
-    std::ifstream inf("kursiokai.txt");
+    try {
+        std::ifstream inf("kursiokai.txt");
 
-    bool start = true;
-    std::string entry;
-    int ndcount = 0, tempnd = 0;
-    while(inf >> entry) {
-        if (start) {
-            if (entry.find("ND") == 0) {
-                ndcount++;
+        bool start = true;
+        std::string entry;
+        int ndcount = 0, tempnd = 0;
+        while(inf >> entry) {
+            if (start) {
+                if (entry.find("ND") == 0) {
+                    ndcount++;
+                }
+                if (entry == "Egzaminas") {
+                    start = false;
+                }
+            } else {
+                studentas stud;
+                stud.surname = entry;
+                inf >> stud.name;
+                for(int i = 0; i < ndcount; i++){
+                    inf >> tempnd;
+                    if(tempnd < 1 || tempnd > 10){
+                        tempnd = 1;
+                        std::cout << "Rasta bloga namu darbu reiksme. Ji pakeista i 1." << std::endl;
+                    }
+                    stud.nd.push_back(tempnd);
+                }
+                inf >> stud.egz;
+                if(stud.egz < 1 || stud.egz > 10){
+                    stud.egz = 1;
+                    std::cout << "Rasta bloga egzamino reiksme. Ji pakeista i 1." << std::endl;
+                }
+                users.push_back(stud);
             }
-            if (entry == "Egzaminas") {
-                start = false;
-            }
-        } else {
-            studentas stud;
-            stud.surname = entry;
-            inf >> stud.name;
-            for(int i = 0; i < ndcount; i++){
-                inf >> tempnd;
-                stud.nd.push_back(tempnd);
-            }
-            inf >> stud.egz;
-            users.push_back(stud);
         }
+    } catch (std::exception& e) {
+        std::cout << "Klaida ikeliant failus is kursiokai.txt. Galbut failas neegzistuoja?";
     }
 
     return users;
@@ -145,6 +175,8 @@ int main() {
         std::cout << "4. Pergeneruoti visu ivestu studentu namu darbu balus i atsitiktinius;" << std::endl;
         std::cout << "5. Ivesti studentu informacija is kursiokai.txt failo;" << std::endl;
         std::cin >> selection;
+
+
         switch(selection) {
             case 1:
                 users.push_back(getUserInfo());
