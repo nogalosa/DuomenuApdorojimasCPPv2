@@ -19,6 +19,11 @@ Vardas2     Pavardė2    7    10    8    5    4    6
 ```
 * Run the program.
 
+__v0.3 Changelog:__
+* Added header file;
+* Integrated exception handling for file loading;
+* Input checking.
+
 __v0.2 Changelog:__
 * Added information loading from kursiokai.txt file;
 * Output is now ordered alphabetically;
