@@ -112,6 +112,27 @@ void showResults(std::vector<studentas> users, bool median) {
 
 }
 
+double getResult(studentas stud, bool median){
+    std::vector<studentas> users;
+    users.push_back(stud);
+    double imedian, galutinis,suma = 0;
+    if(median) {
+        users = sortByNd(users);
+        if(users.size() % 2 == 0){
+            imedian = (double)(users[0].nd[users[0].nd.size()/2] + users[0].nd[users[0].nd.size()/2-1])/2;
+        } else {
+            imedian = floor((double)users[0].nd[users[0].nd.size()/2]);
+        }
+        galutinis = imedian * 0.4 + 0.6 * (double) users[0].egz;
+    } else {
+        for(int j = 0; j < users[0].nd.size(); j++){
+            suma += users[0].nd[j];
+        }
+        galutinis = (suma / (double) users[0].nd.size()) * 0.4 + 0.6 * (double) users[0].egz;
+    }
+    return galutinis;
+}
+
 std::vector<studentas> regenerateResults(std::vector<studentas> users) {
     srand(time(NULL));
     for(int i = 0; i < users.size(); i++){
@@ -119,6 +140,48 @@ std::vector<studentas> regenerateResults(std::vector<studentas> users) {
             users[i].nd[j] = 1 + (rand() % 10);
         }
     }
+    return users;
+}
+
+std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int amount) {
+    srand(time(NULL));
+
+    std::ofstream osless("nuskriaustukai.txt");
+    std::ofstream osmore("galvociai.txt");
+
+    osless << std::left << std::setw(15) << "Vardas" << std::left << std::setw(15) << "Pavarde";
+    for(int i = 0; i < 10; i++)
+        osless << "NS" << (i+1) << "   ";
+    osless << "Egzaminas" << std::endl;
+    osmore << std::left << std::setw(15) << "Vardas" << std::left << std::setw(15) << "Pavarde";
+    for(int i = 0; i < 10; i++)
+        osmore << "NS" << (i+1) << "   ";
+    osmore << "Egzaminas" << std::endl;
+
+    for(int i = 0; i < amount; i++){
+        studentas stud;
+        stud.name = ("Vardas" + std::to_string(i));
+        stud.surname = ("Pavarde" + std::to_string(i));
+        for(int j = 0; j < 10; j++) {
+            stud.nd.push_back(1 + (rand() % 10));
+        }
+        stud.egz = 1 + (rand() % 10);
+        users.push_back(stud);
+        if(getResult(stud,false) >= 5){
+            osmore << std::left << std::setw(15) << stud.name << std::left << std::setw(15) << stud.surname;
+            for(int j = 0; j < stud.nd.size(); j++){
+                osmore << std::left << std::setw(6) << stud.nd[j];
+            }
+            osmore << " " << stud.egz << std::endl;
+        }else {
+            osless << std::left << std::setw(15) << stud.name << std::left << std::setw(15) << stud.surname;
+            for(int j = 0; j < stud.nd.size(); j++){
+                osless << std::left << std::setw(6) << stud.nd[j];
+            }
+            osless << " " << stud.egz << std::endl;
+        }
+    }
+
     return users;
 }
 
@@ -164,6 +227,46 @@ std::vector<studentas> loadStudents(std::vector<studentas> users) {
     return users;
 }
 
+std::vector<studentas> generationMenu(std::vector<studentas> users){
+    int selection = 0;
+    while(selection == 0){
+        std::cout << "Pasirinkite, kiek studentu norite sugeneruoti:" << std::endl;
+        std::cout << "1. 10 studentu" << std::endl;
+        std::cout << "2. 100 studentu" << std::endl;
+        std::cout << "3. 1000 studentu" << std::endl;
+        std::cout << "4. 10 000 studentu" << std::endl;
+        std::cout << "5. 100 000 studentu" << std::endl;
+        std::cout << "6. Atsaukti" << std::endl;
+        std::cin >> selection;
+        checkInput();
+
+        if(selection >= 1 && selection <= 5){
+            auto gen = 10;
+            switch (selection){
+                case 2:
+                    gen = 100;
+                    break;
+                case 3:
+                    gen = 1000;
+                    break;
+                case 4:
+                    gen = 10000;
+                    break;
+                case 5:
+                    gen = 100000;
+                    break;
+            }
+            users = generateStudentsAndLoad(users, gen);
+            return users;
+        }else if(selection == 6){
+            return users;
+        } else {
+            std::cout << "Ivestas neteisingas pasirinkimas. Pabandykite vel." << std::endl;
+            selection = 0;
+        }
+    }
+}
+
 int main() {
     std::vector<studentas> users;
     int selection = 1;
@@ -174,6 +277,7 @@ int main() {
         std::cout << "3. Suskaiciuoti galutinius balus (su mediana);" << std::endl;
         std::cout << "4. Pergeneruoti visu ivestu studentu namu darbu balus i atsitiktinius;" << std::endl;
         std::cout << "5. Ivesti studentu informacija is kursiokai.txt failo;" << std::endl;
+        std::cout << "6. Sugeneruoti tam tikra skaiciu studentu, juos ikelti i programa ir isaugoti failuose;" << std::endl;
         std::cin >> selection;
 
 
@@ -193,6 +297,10 @@ int main() {
                 break;
             case 5:
                 users = loadStudents(users);
+                selection = 1;
+                break;
+            case 6:
+                users = generationMenu(users);
                 selection = 1;
                 break;
             default:
