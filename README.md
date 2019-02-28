@@ -19,6 +19,10 @@ Vardas2     Pavardė2    7    10    8    5    4    6
 ```
 * Run the program.
 
+__v0.4 Changelog:__
+* Added random student generator
+* Added chrono benchmark information
+
 __v0.3 Changelog:__
 * Added header file;
 * Integrated exception handling for file loading;
