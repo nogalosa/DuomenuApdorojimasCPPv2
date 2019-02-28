@@ -7,13 +7,19 @@ void checkInput(){
     }
 }
 
-std::vector<studentas> sortByNd(std::vector<studentas> users) {
+std::vector<studentas> sortByNd(std::vector<studentas> users, bool chrono) {
+    auto start = std::chrono::system_clock::now();
     int i, j, k;
     for (i = 0; i < users.size(); i++)
         for (j = 0; j < users[i].nd.size()-1; j++)
             for (k = 0; k < users[i].nd.size()-j-1; k++)
                 if (users[i].nd[k] > users[i].nd[k+1])
                     std::swap(users[i].nd[k],users[i].nd[k+1]);
+    if(chrono) {
+        auto end = std::chrono::system_clock::now();
+        auto elapsed = end - start;
+        std::cout << "Rusiavimas uztruko: " << (double)elapsed.count()/10000000 << "s." << std::endl;
+    }
     return users;
 }
 std::vector<studentas> sortByName(std::vector<studentas> users) {
@@ -86,12 +92,13 @@ void showResults(std::vector<studentas> users, bool median) {
     std::cout << "--------------------------------------------------" << std::endl;
     double galutinis = 0,imedian = 0;
     int suma = 0 ;
+    users = sortByNd(users, true);
+    auto start = std::chrono::system_clock::now();
     for(int i = 0; i < users.size(); i++){
         suma = 0;
         std::cout << users[i].surname << std::string(longestSurname - users[i].surname.size() + 1, ' ') << users[i].name << std::string(longestName - users[i].name.size() + 1, ' ');
 
         if(median) {
-            users = sortByNd(users);
             if(users.size() % 2 == 0){
                 imedian = (double)(users[i].nd[users[i].nd.size()/2] + users[i].nd[users[i].nd.size()/2-1])/2;
             } else {
@@ -109,7 +116,9 @@ void showResults(std::vector<studentas> users, bool median) {
 //        std::cout << suma << " < " << users[i].nd.size() << " < " << users[i].egz << " < " << galutinis;
         std::cout << std::endl;
     }
-
+    auto end = std::chrono::system_clock::now();
+    auto elapsed = end - start;
+    std::cout << "Spausdinimas uztruko: " << (double)elapsed.count()/10000000 << "s." << std::endl;
 }
 
 double getResult(studentas stud, bool median){
@@ -117,7 +126,7 @@ double getResult(studentas stud, bool median){
     users.push_back(stud);
     double imedian, galutinis,suma = 0;
     if(median) {
-        users = sortByNd(users);
+        users = sortByNd(users, false);
         if(users.size() % 2 == 0){
             imedian = (double)(users[0].nd[users[0].nd.size()/2] + users[0].nd[users[0].nd.size()/2-1])/2;
         } else {
@@ -134,16 +143,21 @@ double getResult(studentas stud, bool median){
 }
 
 std::vector<studentas> regenerateResults(std::vector<studentas> users) {
+    auto start = std::chrono::system_clock::now();
     srand(time(NULL));
     for(int i = 0; i < users.size(); i++){
         for(int j = 0; j < users[i].nd.size(); j++) {
             users[i].nd[j] = 1 + (rand() % 10);
         }
     }
+    auto end = std::chrono::system_clock::now();
+    auto elapsed = end - start;
+    std::cout << "Regeneracija uztruko: " << (double)elapsed.count()/10000000 << "s." << std::endl;
     return users;
 }
 
 std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int amount) {
+    auto start = std::chrono::system_clock::now();
     srand(time(NULL));
 
     std::ofstream osless("nuskriaustukai.txt");
@@ -181,6 +195,10 @@ std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int
             osless << " " << stud.egz << std::endl;
         }
     }
+
+    auto end = std::chrono::system_clock::now();
+    auto elapsed = end - start;
+    std::cout << "Generacija uztruko: " << (double)elapsed.count()/10000000 << "s." << std::endl;
 
     return users;
 }
@@ -268,6 +286,7 @@ std::vector<studentas> generationMenu(std::vector<studentas> users){
 }
 
 int main() {
+
     std::vector<studentas> users;
     int selection = 1;
     while(selection == 1){

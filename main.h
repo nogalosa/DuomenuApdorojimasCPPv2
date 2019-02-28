@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <fstream>
 #include <algorithm>
+#include <chrono>
 
 struct studentas {
     std::string name, surname;
@@ -21,7 +22,7 @@ struct studentas {
 };
 
 void checkInput();
-std::vector<studentas> sortByNd(std::vector<studentas> users);
+std::vector<studentas> sortByNd(std::vector<studentas> users, bool chrono);
 std::vector<studentas> sortByName(std::vector<studentas> users);
 studentas getUserInfo();
 void showResults(std::vector<studentas> users, bool median);
