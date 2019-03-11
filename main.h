@@ -15,6 +15,7 @@
 #include <algorithm>
 #include <chrono>
 #include <random>
+#include <list>
 
 struct studentas {
     std::string name, surname;
@@ -23,14 +24,14 @@ struct studentas {
 };
 
 void checkInput();
-std::vector<studentas> sortByNd(std::vector<studentas> users, bool chrono);
-std::vector<studentas> sortByName(std::vector<studentas> users);
+std::list<studentas> sortByNd(std::list<studentas> users, bool chrono);
+std::list<studentas> sortByName(std::list<studentas> users);
 studentas getUserInfo();
-void showResults(std::vector<studentas> users, bool median);
+void showResults(std::list<studentas> users, bool median);
 double getResult(studentas stud, bool median);
-std::vector<studentas> regenerateResults(std::vector<studentas> users);
-std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int amount);
-std::vector<studentas> loadStudents(std::vector<studentas> users);
-std::vector<studentas> generationMenu(std::vector<studentas> users);
+std::list<studentas> regenerateResults(std::list<studentas> users);
+std::list<studentas> generateStudentsAndLoad(std::list<studentas> users, int amount);
+std::list<studentas> loadStudents(std::list<studentas> users);
+std::list<studentas> generationMenu(std::list<studentas> users);
 
 #endif //DUOMENUAPDOROJIMASCPP_MAIN_H

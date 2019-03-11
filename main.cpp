@@ -7,14 +7,14 @@ void checkInput(){
     }
 }
 
-std::vector<studentas> sortByNd(std::vector<studentas> users, bool chrono) {
+std::list<studentas> sortByNd(std::list<studentas> users, bool chrono) {
     auto start = std::chrono::system_clock::now();
     int i, j, k;
-    for (i = 0; i < users.size(); i++)
-        for (j = 0; j < users[i].nd.size()-1; j++)
-            for (k = 0; k < users[i].nd.size()-j-1; k++)
-                if (users[i].nd[k] > users[i].nd[k+1])
-                    std::swap(users[i].nd[k],users[i].nd[k+1]);
+    for (auto user : users)
+        for (j = 0; j < user.nd.size()-1; j++)
+            for (k = 0; k < user.nd.size()-j-1; k++)
+                if (user.nd[k] > user.nd[k+1])
+                    std::swap(user.nd[k],user.nd[k+1]);
     if(chrono) {
         auto end = std::chrono::system_clock::now();
         auto elapsed = end - start;
@@ -22,10 +22,11 @@ std::vector<studentas> sortByNd(std::vector<studentas> users, bool chrono) {
     }
     return users;
 }
-std::vector<studentas> sortByName(std::vector<studentas> users) {
-    std::sort(std::begin(users), std::end(users), [](const studentas &a1, const studentas &a2 ){
-        return a1.name.compare(a2.name) < 0;
-    });
+std::list<studentas> sortByName(std::list<studentas> users) {
+//    std::sort(std::begin(users), std::end(users), [](const studentas &a1, const studentas &a2 ){
+//        return a1.name.compare(a2.name) < 0;
+//    });
+    users.sort([](studentas const a, studentas const  b) {return a.name.compare(b.name) < 0;});
     return users;
 }
 
@@ -75,13 +76,13 @@ studentas getUserInfo() {
     return stud;
 }
 
-void showResults(std::vector<studentas> users, bool median) {
+void showResults(std::list<studentas> users, bool median) {
     int longestName = 0, longestSurname = 0;
-    for (int i = 0; i < users.size(); i++) {
-        if(users[i].name.size() > longestName)
-            longestName = users[i].name.size();
-        if(users[i].surname.size() > longestSurname)
-            longestSurname = users[i].surname.size();
+    for (auto user : users) {
+        if(user.name.size() > longestName)
+            longestName = user.name.size();
+        if(user.surname.size() > longestSurname)
+            longestSurname = user.surname.size();
     }
     if(longestSurname < 7)
         longestSurname = 7;
@@ -94,26 +95,26 @@ void showResults(std::vector<studentas> users, bool median) {
     int suma = 0 ;
     users = sortByNd(users, true);
     auto start = std::chrono::system_clock::now();
-    for(int i = 0; i < users.size(); i++){
+    for(auto user : users){
         suma = 0;
-        std::cout << users[i].surname << std::string(longestSurname - users[i].surname.size() + 1, ' ') << users[i].name << std::string(longestName - users[i].name.size() + 1, ' ');
+        std::cout << user.surname << std::string(longestSurname - user.surname.size() + 1, ' ') << user.name << std::string(longestName - user.name.size() + 1, ' ');
 
         if(median) {
             if(users.size() % 2 == 0){
-                imedian = (double)(users[i].nd[users[i].nd.size()/2] + users[i].nd[users[i].nd.size()/2-1])/2;
+                imedian = (double)(user.nd[user.nd.size()/2] + user.nd[user.nd.size()/2-1])/2;
             } else {
-                imedian = floor((double)users[i].nd[users[i].nd.size()/2]);
+                imedian = floor((double)user.nd[user.nd.size()/2]);
             }
-            galutinis = imedian * 0.4 + 0.6 * (double) users[i].egz;
+            galutinis = imedian * 0.4 + 0.6 * (double) user.egz;
         } else {
-            for(int j = 0; j < users[i].nd.size(); j++){
-                suma += users[i].nd[j];
+            for(int j = 0; j < user.nd.size(); j++){
+                suma += user.nd[j];
             }
-            galutinis = ((double) suma / (double) users[i].nd.size()) * 0.4 + 0.6 * (double) users[i].egz;
+            galutinis = ((double) suma / (double) user.nd.size()) * 0.4 + 0.6 * (double) user.egz;
         }
 
         std::cout << std::setprecision(2) << std::fixed << galutinis;
-//        std::cout << suma << " < " << users[i].nd.size() << " < " << users[i].egz << " < " << galutinis;
+//        std::cout << suma << " < " << user.nd.size() << " < " << user.egz << " < " << galutinis;
         std::cout << std::endl;
     }
     auto end = std::chrono::system_clock::now();
@@ -122,32 +123,32 @@ void showResults(std::vector<studentas> users, bool median) {
 }
 
 double getResult(studentas stud, bool median){
-    std::vector<studentas> users;
+    std::list<studentas> users;
     users.push_back(stud);
     double imedian, galutinis,suma = 0;
     if(median) {
         users = sortByNd(users, false);
         if(users.size() % 2 == 0){
-            imedian = (double)(users[0].nd[users[0].nd.size()/2] + users[0].nd[users[0].nd.size()/2-1])/2;
+            imedian = (double)(users.front().nd[users.front().nd.size()/2] + users.front().nd[users.front().nd.size()/2-1])/2;
         } else {
-            imedian = floor((double)users[0].nd[users[0].nd.size()/2]);
+            imedian = floor((double)users.front().nd[users.front().nd.size()/2]);
         }
-        galutinis = imedian * 0.4 + 0.6 * (double) users[0].egz;
+        galutinis = imedian * 0.4 + 0.6 * (double) users.front().egz;
     } else {
-        for(int j = 0; j < users[0].nd.size(); j++){
-            suma += users[0].nd[j];
+        for(int j = 0; j < users.front().nd.size(); j++){
+            suma += users.front().nd[j];
         }
-        galutinis = (suma / (double) users[0].nd.size()) * 0.4 + 0.6 * (double) users[0].egz;
+        galutinis = (suma / (double) users.front().nd.size()) * 0.4 + 0.6 * (double) users.front().egz;
     }
     return galutinis;
 }
 
-std::vector<studentas> regenerateResults(std::vector<studentas> users) {
+std::list<studentas> regenerateResults(std::list<studentas> users) {
     auto start = std::chrono::system_clock::now();
     srand(time(NULL));
-    for(int i = 0; i < users.size(); i++){
-        for(int j = 0; j < users[i].nd.size(); j++) {
-            users[i].nd[j] = 1 + (rand() % 10);
+    for(auto user : users){
+        for(int j = 0; j < user.nd.size(); j++) {
+            user.nd[j] = 1 + (rand() % 10);
         }
     }
     auto end = std::chrono::system_clock::now();
@@ -156,7 +157,7 @@ std::vector<studentas> regenerateResults(std::vector<studentas> users) {
     return users;
 }
 
-std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int amount) {
+std::list<studentas> generateStudentsAndLoad(std::list<studentas> users, int amount) {
     auto start = std::chrono::system_clock::now();
     srand(time(NULL));
 
@@ -203,7 +204,7 @@ std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int
     return users;
 }
 
-std::vector<studentas> loadStudents(std::vector<studentas> users) {
+std::list<studentas> loadStudents(std::list<studentas> users) {
     try {
         std::ifstream inf("kursiokai.txt");
 
@@ -245,7 +246,7 @@ std::vector<studentas> loadStudents(std::vector<studentas> users) {
     return users;
 }
 
-std::vector<studentas> generationMenu(std::vector<studentas> users){
+std::list<studentas> generationMenu(std::list<studentas> users){
     int selection = 0;
     while(selection == 0){
         std::cout << "Pasirinkite, kiek studentu norite sugeneruoti:" << std::endl;
@@ -295,7 +296,7 @@ int main() {
 //    }
 //    std::cout << dist(mt) << " ";
 
-    std::vector<studentas> users;
+    std::list<studentas> users;
     int selection = 1;
     while(selection == 1){
         std::cout << "Ivesta " << users.size() << " stud. Pasirinkite:" << std::endl;
