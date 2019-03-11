@@ -37,6 +37,7 @@ __v0.1 Changelog:__
 * Initial release.
 
 __v0.4 Benchmarks:__
+
 | Num. of students | Generation time (s.) | Execution time (s.) | Total (s.) |
 | :---: | :---: | :---: | :---: |
 | 10 | 0.0077851 | 0.0002216 | 0.0080067 |
