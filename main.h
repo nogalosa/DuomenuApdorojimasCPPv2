@@ -14,6 +14,7 @@
 #include <fstream>
 #include <algorithm>
 #include <chrono>
+#include <random>
 
 struct studentas {
     std::string name, surname;
