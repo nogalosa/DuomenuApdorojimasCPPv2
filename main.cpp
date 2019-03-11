@@ -7,7 +7,7 @@ void checkInput(){
     }
 }
 
-std::list<studentas> sortByNd(std::list<studentas> users, bool chrono) {
+std::deque<studentas> sortByNd(std::deque<studentas> users, bool chrono) {
     auto start = std::chrono::system_clock::now();
     int i, j, k;
     for (auto user : users)
@@ -22,11 +22,11 @@ std::list<studentas> sortByNd(std::list<studentas> users, bool chrono) {
     }
     return users;
 }
-std::list<studentas> sortByName(std::list<studentas> users) {
-//    std::sort(std::begin(users), std::end(users), [](const studentas &a1, const studentas &a2 ){
-//        return a1.name.compare(a2.name) < 0;
-//    });
-    users.sort([](studentas const a, studentas const  b) {return a.name.compare(b.name) < 0;});
+std::deque<studentas> sortByName(std::deque<studentas> users) {
+    std::sort(std::begin(users), std::end(users), [](const studentas &a1, const studentas &a2 ){
+        return a1.name.compare(a2.name) < 0;
+    });
+    //users.sort([](studentas const a, studentas const  b) {return a.name.compare(b.name) < 0;});
     return users;
 }
 
@@ -76,7 +76,7 @@ studentas getUserInfo() {
     return stud;
 }
 
-void showResults(std::list<studentas> users, bool median) {
+void showResults(std::deque<studentas> users, bool median) {
     int longestName = 0, longestSurname = 0;
     for (auto user : users) {
         if(user.name.size() > longestName)
@@ -123,7 +123,7 @@ void showResults(std::list<studentas> users, bool median) {
 }
 
 double getResult(studentas stud, bool median){
-    std::list<studentas> users;
+    std::deque<studentas> users;
     users.push_back(stud);
     double imedian, galutinis,suma = 0;
     if(median) {
@@ -143,7 +143,7 @@ double getResult(studentas stud, bool median){
     return galutinis;
 }
 
-std::list<studentas> regenerateResults(std::list<studentas> users) {
+std::deque<studentas> regenerateResults(std::deque<studentas> users) {
     auto start = std::chrono::system_clock::now();
     srand(time(NULL));
     for(auto user : users){
@@ -157,7 +157,7 @@ std::list<studentas> regenerateResults(std::list<studentas> users) {
     return users;
 }
 
-std::list<studentas> generateStudentsAndLoad(std::list<studentas> users, int amount) {
+std::deque<studentas> generateStudentsAndLoad(std::deque<studentas> users, int amount) {
     auto start = std::chrono::system_clock::now();
     srand(time(NULL));
 
@@ -204,7 +204,7 @@ std::list<studentas> generateStudentsAndLoad(std::list<studentas> users, int amo
     return users;
 }
 
-std::list<studentas> loadStudents(std::list<studentas> users) {
+std::deque<studentas> loadStudents(std::deque<studentas> users) {
     try {
         std::ifstream inf("kursiokai.txt");
 
@@ -246,7 +246,7 @@ std::list<studentas> loadStudents(std::list<studentas> users) {
     return users;
 }
 
-std::list<studentas> generationMenu(std::list<studentas> users){
+std::deque<studentas> generationMenu(std::deque<studentas> users){
     int selection = 0;
     while(selection == 0){
         std::cout << "Pasirinkite, kiek studentu norite sugeneruoti:" << std::endl;
@@ -296,7 +296,7 @@ int main() {
 //    }
 //    std::cout << dist(mt) << " ";
 
-    std::list<studentas> users;
+    std::deque<studentas> users;
     int selection = 1;
     while(selection == 1){
         std::cout << "Ivesta " << users.size() << " stud. Pasirinkite:" << std::endl;

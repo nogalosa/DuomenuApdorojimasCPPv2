@@ -52,3 +52,4 @@ __v0.5 Benchmarks:__
 | :---: | :---: | :---: |
 | 1 000 | Vector (from file) | 0.0051633 |
 | 1 000 | List (from file) | 0.0072464 |
+| 1 000 | Deque (from file) | 0.0083684 |
