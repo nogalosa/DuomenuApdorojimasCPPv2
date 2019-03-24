@@ -15,7 +15,8 @@
 #include <algorithm>
 #include <chrono>
 #include <random>
-#include <deque>
+#include <vector>
+#include "RandInt.h"
 
 struct studentas {
     std::string name, surname;
@@ -24,14 +25,14 @@ struct studentas {
 };
 
 void checkInput();
-std::deque<studentas> sortByNd(std::deque<studentas> users, bool chrono);
-std::deque<studentas> sortByName(std::deque<studentas> users);
+std::vector<studentas> sortByNd(std::vector<studentas> users, bool chrono);
+std::vector<studentas> sortByName(std::vector<studentas> users);
 studentas getUserInfo();
-void showResults(std::deque<studentas> users, bool median);
+void showResults(std::vector<studentas> users, bool median);
 double getResult(studentas stud, bool median);
-std::deque<studentas> regenerateResults(std::deque<studentas> users);
-std::deque<studentas> generateStudentsAndLoad(std::deque<studentas> users, int amount);
-std::deque<studentas> loadStudents(std::deque<studentas> users);
-std::deque<studentas> generationMenu(std::deque<studentas> users);
+std::vector<studentas> regenerateResults(std::vector<studentas> users);
+std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int amount);
+std::vector<studentas> loadStudents(std::vector<studentas> users);
+std::vector<studentas> generationMenu(std::vector<studentas> users);
 
 #endif //DUOMENUAPDOROJIMASCPP_MAIN_H

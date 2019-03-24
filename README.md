@@ -8,6 +8,8 @@ Duomenu Apdorojimas
 
 Pagal [/objprog/paskaitos2019/wiki/2-oji-užduotis](https://github.com/objprog/paskaitos2019/wiki/2-oji-u%C5%BEduotis) atliekama užduotis.
 
+___
+
 __How to run:__
 * Compile program with cmake using CMakeLists.txt file;
 * If you want to load data from file, create kursiokai.txt with information you want to input and place it in the same directory as launch file. File ex.:
@@ -18,6 +20,12 @@ Vardas2     Aavardė2    7    10    8    5    4    6
 Vardas2     Pavardė2    7    10    8    5    4    6
 ```
 * Run the program.
+
+___
+
+__v0.5 Changelog:__
+* Remade Vector system to Deque system.
+* Benchmarked execution time of sorting algorythms.
 
 __v0.4 Changelog:__
 * Added random student generator
@@ -36,6 +44,25 @@ __v0.2 Changelog:__
 __v0.1 Changelog:__
 * Initial release.
 
+___
+__v1.0 Benchmarks:__
+
+1 000 students generation time in seconds.
+
+| Type \ Strategy | 1 | 2 | 3 (optimized with remove_if) |
+| :---: | :---: | :---: | :---: |
+| Vector | 0.139039 | 0.219113 | 0.318443 |
+| List | 0.176289 | 0.209452 | - |
+| Deque | 0.381602 | 0.199127 | - |
+
+__v0.5 Benchmarks:__
+
+| Num. of students | Type | Execution time (s.) |
+| :---: | :---: | :---: |
+| 1 000 | Vector (from file) | 0.0051633 |
+| 1 000 | List (from file) | 0.0072464 |
+| 1 000 | Deque (from file) | 0.0083684 |
+
 __v0.4 Benchmarks:__
 
 | Num. of students | Generation time (s.) | Execution time (s.) | Total (s.) |
@@ -45,11 +72,3 @@ __v0.4 Benchmarks:__
 | 1 000 | 0.480815 | 0.0179601 | 0.4987751 |
 | 10 000 | 0.95279 | 0.184916 | 1.137706 |
 | 100 000 | 9.47004 | 1.90153 | 11.37157 |
-
-__v0.5 Benchmarks:__
-
-| Num. of students | Type | Execution time (s.) |
-| :---: | :---: | :---: |
-| 1 000 | Vector (from file) | 0.0051633 |
-| 1 000 | List (from file) | 0.0072464 |
-| 1 000 | Deque (from file) | 0.0083684 |

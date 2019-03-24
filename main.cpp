@@ -7,7 +7,7 @@ void checkInput(){
     }
 }
 
-std::deque<studentas> sortByNd(std::deque<studentas> users, bool chrono) {
+std::vector<studentas> sortByNd(std::vector<studentas> users, bool chrono) {
     auto start = std::chrono::system_clock::now();
     int i, j, k;
     for (auto user : users)
@@ -22,11 +22,11 @@ std::deque<studentas> sortByNd(std::deque<studentas> users, bool chrono) {
     }
     return users;
 }
-std::deque<studentas> sortByName(std::deque<studentas> users) {
+std::vector<studentas> sortByName(std::vector<studentas> users) {
     std::sort(std::begin(users), std::end(users), [](const studentas &a1, const studentas &a2 ){
         return a1.name.compare(a2.name) < 0;
     });
-    //users.sort([](studentas const a, studentas const  b) {return a.name.compare(b.name) < 0;});
+//    users.sort([](studentas const a, studentas const  b) {return a.name.compare(b.name) < 0;});
     return users;
 }
 
@@ -76,7 +76,7 @@ studentas getUserInfo() {
     return stud;
 }
 
-void showResults(std::deque<studentas> users, bool median) {
+void showResults(std::vector<studentas> users, bool median) {
     int longestName = 0, longestSurname = 0;
     for (auto user : users) {
         if(user.name.size() > longestName)
@@ -123,7 +123,7 @@ void showResults(std::deque<studentas> users, bool median) {
 }
 
 double getResult(studentas stud, bool median){
-    std::deque<studentas> users;
+    std::vector<studentas> users;
     users.push_back(stud);
     double imedian, galutinis,suma = 0;
     if(median) {
@@ -143,12 +143,12 @@ double getResult(studentas stud, bool median){
     return galutinis;
 }
 
-std::deque<studentas> regenerateResults(std::deque<studentas> users) {
+std::vector<studentas> regenerateResults(std::vector<studentas> users) {
     auto start = std::chrono::system_clock::now();
-    srand(time(NULL));
+    RandInt rnd {0, 9};
     for(auto user : users){
         for(int j = 0; j < user.nd.size(); j++) {
-            user.nd[j] = 1 + (rand() % 10);
+            user.nd[j] = rnd() + 1;
         }
     }
     auto end = std::chrono::system_clock::now();
@@ -157,9 +157,25 @@ std::deque<studentas> regenerateResults(std::deque<studentas> users) {
     return users;
 }
 
-std::deque<studentas> generateStudentsAndLoad(std::deque<studentas> users, int amount) {
+std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int amount) {
+    int strategy = 0;
+    std::cout << "Pasirinkite strategija (1-3):\n1. Pirma strategija\n2. Antra strategija\n3. Optimizuota strategija.\n";
+    std::cin >> strategy;
+    checkInput();
+    if(strategy == 2){
+        std::cout << "Pasirinkta antra strategija" << std::endl;
+    }else if(strategy == 3){
+        std::cout << "Pasirinkta trecia strategija" << std::endl;
+    }else {
+        std::cout << "Pasirinkta pirma strategija" << std::endl;
+    }
+
+
     auto start = std::chrono::system_clock::now();
-    srand(time(NULL));
+    RandInt rnd {0, 9};
+
+    std::vector<studentas> nuskriaustukai;
+    std::vector<studentas> galvociai;
 
     std::ofstream osless("nuskriaustukai.txt");
     std::ofstream osmore("galvociai.txt");
@@ -178,23 +194,41 @@ std::deque<studentas> generateStudentsAndLoad(std::deque<studentas> users, int a
         stud.name = ("Vardas" + std::to_string(i));
         stud.surname = ("Pavarde" + std::to_string(i));
         for(int j = 0; j < 10; j++) {
-            stud.nd.push_back(1 + (rand() % 10));
+            stud.nd.push_back(rnd() + 1);
         }
-        stud.egz = 1 + (rand() % 10);
-        users.push_back(stud);
+        stud.egz = rnd() + 1;
+        if(strategy != 2)
+            users.push_back(stud);
         if(getResult(stud,false) >= 5){
             osmore << std::left << std::setw(15) << stud.name << std::left << std::setw(15) << stud.surname;
             for(int j = 0; j < stud.nd.size(); j++){
                 osmore << std::left << std::setw(6) << stud.nd[j];
             }
             osmore << " " << stud.egz << std::endl;
+            if(strategy == 2){
+                users.push_back(stud);
+            } else if(strategy == 1) {
+                galvociai.push_back(stud);
+            }
         }else {
             osless << std::left << std::setw(15) << stud.name << std::left << std::setw(15) << stud.surname;
             for(int j = 0; j < stud.nd.size(); j++){
                 osless << std::left << std::setw(6) << stud.nd[j];
             }
             osless << " " << stud.egz << std::endl;
+            if(strategy == 1 || strategy == 2)
+                nuskriaustukai.push_back(stud);
         }
+    }
+
+    if(strategy == 3) {
+        remove_copy_if(users.begin(), users.end(),
+                       back_inserter(nuskriaustukai), [](const studentas &a1){
+                    return getResult(a1,false) >= 5;
+                });
+        users.erase(std::remove_if(users.begin(), users.end(), [](const studentas &a1){
+                        return getResult(a1,false) < 5;
+                    }), users.end());
     }
 
     auto end = std::chrono::system_clock::now();
@@ -204,7 +238,7 @@ std::deque<studentas> generateStudentsAndLoad(std::deque<studentas> users, int a
     return users;
 }
 
-std::deque<studentas> loadStudents(std::deque<studentas> users) {
+std::vector<studentas> loadStudents(std::vector<studentas> users) {
     try {
         std::ifstream inf("kursiokai.txt");
 
@@ -246,7 +280,7 @@ std::deque<studentas> loadStudents(std::deque<studentas> users) {
     return users;
 }
 
-std::deque<studentas> generationMenu(std::deque<studentas> users){
+std::vector<studentas> generationMenu(std::vector<studentas> users){
     int selection = 0;
     while(selection == 0){
         std::cout << "Pasirinkite, kiek studentu norite sugeneruoti:" << std::endl;
@@ -296,7 +330,7 @@ int main() {
 //    }
 //    std::cout << dist(mt) << " ";
 
-    std::deque<studentas> users;
+    std::vector<studentas> users;
     int selection = 1;
     while(selection == 1){
         std::cout << "Ivesta " << users.size() << " stud. Pasirinkite:" << std::endl;
