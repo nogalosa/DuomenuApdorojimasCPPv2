@@ -23,9 +23,30 @@ Vardas2     Pavardė2    7    10    8    5    4    6
 
 ___
 
+__Using the program:__
+
+The program displays a menu when opened.
+You can:
+1. Ivesti nauja studenta;
+2. Suskaiciuoti galutinius balus (su vidurkiu);
+3. Suskaiciuoti galutinius balus (su mediana);
+4. Pergeneruoti visu ivestu studentu namu darbu balus i atsitiktinius;
+5. Ivesti studentu informacija is kursiokai.txt failo;
+6. Sugeneruoti tam tikra skaiciu studentu, juos ikelti i programa ir isaugoti failuose;
+
+How many students are added to `users` vector on sixth menu selection depends on selected strategy.
+
+___
+
+__v1.0 Changelog:__
+* Remade Deque system to Vector system.
+* Updated random number generation method 
+* Added code optimization strategy with remove_if.
+* Added benchmark results to README.md.
+
 __v0.5 Changelog:__
-* Remade Vector system to Deque system.
-* Benchmarked execution time of sorting algorythms.
+* Remade Vector system to List system and then to Deque system.
+* Benchmarked execution time of sorting algorythms of each container.
 
 __v0.4 Changelog:__
 * Added random student generator
@@ -47,7 +68,7 @@ __v0.1 Changelog:__
 ___
 __v1.0 Benchmarks:__
 
-1 000 students generation time in seconds.
+1 000 students generation time in seconds. First strategy puts every student to main `users` vector and to vectors called `nuskriaustukai` and `galvociai` depending on what marks do they get. Second strategy puts students with better marks to `users` vector, and with lower marks directly to `nuskriaustukai` vector. The third strategy puts students directly to `users` array and after that it is sorted to `users` and `nuskriaustukai` depending on their marks.
 
 | Type \ Strategy | 1 | 2 | 3 (optimized with remove_if) |
 | :---: | :---: | :---: | :---: |
@@ -57,6 +78,8 @@ __v1.0 Benchmarks:__
 
 __v0.5 Benchmarks:__
 
+Used a file containing 1000 students info. Measured sorting time.
+
 | Num. of students | Type | Execution time (s.) |
 | :---: | :---: | :---: |
 | 1 000 | Vector (from file) | 0.0051633 |
@@ -64,6 +87,8 @@ __v0.5 Benchmarks:__
 | 1 000 | Deque (from file) | 0.0083684 |
 
 __v0.4 Benchmarks:__
+
+Measured file generation time and execution (sorting) time in seconds.
 
 | Num. of students | Generation time (s.) | Execution time (s.) | Total (s.) |
 | :---: | :---: | :---: | :---: |

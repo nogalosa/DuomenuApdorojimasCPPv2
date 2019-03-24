@@ -18,7 +18,7 @@ std::vector<studentas> sortByNd(std::vector<studentas> users, bool chrono) {
     if(chrono) {
         auto end = std::chrono::system_clock::now();
         auto elapsed = end - start;
-        std::cout << "Rusiavimas uztruko: " << (double)elapsed.count()/10000000 << "s." << std::endl;
+        std::cout << "# Rusiavimas uztruko: " << (double)elapsed.count()/10000000 << "s." << std::endl;
     }
     return users;
 }
@@ -119,7 +119,7 @@ void showResults(std::vector<studentas> users, bool median) {
     }
     auto end = std::chrono::system_clock::now();
     auto elapsed = end - start;
-    std::cout << "Spausdinimas uztruko: " << (double)elapsed.count()/10000000 << "s." << std::endl;
+    std::cout << "# Spausdinimas uztruko: " << (double)elapsed.count()/10000000 << "s." << std::endl;
 }
 
 double getResult(studentas stud, bool median){
@@ -153,7 +153,7 @@ std::vector<studentas> regenerateResults(std::vector<studentas> users) {
     }
     auto end = std::chrono::system_clock::now();
     auto elapsed = end - start;
-    std::cout << "Regeneracija uztruko: " << (double)elapsed.count()/10000000 << "s." << std::endl;
+    std::cout << "# Regeneracija uztruko: " << (double)elapsed.count()/10000000 << "s." << std::endl;
     return users;
 }
 
@@ -233,7 +233,7 @@ std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int
 
     auto end = std::chrono::system_clock::now();
     auto elapsed = end - start;
-    std::cout << "Generacija uztruko: " << (double)elapsed.count()/10000000 << "s." << std::endl;
+    std::cout << "# Generacija uztruko: " << (double)elapsed.count()/10000000 << "s." << std::endl;
 
     return users;
 }
@@ -341,6 +341,7 @@ int main() {
         std::cout << "5. Ivesti studentu informacija is kursiokai.txt failo;" << std::endl;
         std::cout << "6. Sugeneruoti tam tikra skaiciu studentu, juos ikelti i programa ir isaugoti failuose;" << std::endl;
         std::cin >> selection;
+        checkInput();
 
 
         switch(selection) {
