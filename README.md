@@ -39,16 +39,16 @@ How many students are added to `users` vector on sixth menu selection depends on
 ___
 
 __v1.0 Changelog:__
-* Remade Deque system to Vector system.
-* Updated random number generation method 
-* Added code optimization strategy with remove_if.
+* Remade Deque system to Vector system;
+* Updated random number generation method;
+* Added code optimization strategy with remove_if;
 * Added benchmark results to README.md.
 
 __v0.5.1 Changelog:__
 * Added exception throwing.
 
 __v0.5 Changelog:__
-* Remade Vector system to List system and then to Deque system.
+* Remade Vector system to List system and then to Deque system;
 * Benchmarked execution time of sorting algorythms of each container.
 
 __v0.4.2 Changelog:__
@@ -58,8 +58,8 @@ __v0.4.1 Changelog:__
 * Added benchmark results to README.md.
 
 __v0.4 Changelog:__
-* Added random student generator
-* Added chrono benchmark information
+* Added random student generator;
+* Added chrono benchmark information.
 
 __v0.3.1 Changelog:__
 * Added exception throwing.
