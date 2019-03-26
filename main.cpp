@@ -157,15 +157,62 @@ std::vector<studentas> regenerateResults(std::vector<studentas> users) {
     return users;
 }
 
+// minkštus studentus nukopijuoja į naują vektorių ir ištrina iš seno
+std::vector<studentas> raskMinkstus(std::vector<studentas>& studentai) {
+    auto start = std::chrono::system_clock::now();
+
+    std::vector<studentas> minksti;
+    std::vector<studentas>::size_type i = 0;
+    // invariantas: vektoriaus `studentai` elementai [0, i) yra "kieti"
+    while (i != studentai.size()) {
+        if (getResult(studentai[i],false) < 5) {
+            minksti.push_back(studentai[i]);
+            studentai.erase(studentai.begin() + i);  // ištrinti i-ąjį stud.
+        } else
+            ++i;  // pereiti prie kito studento
+    }
+
+    auto end = std::chrono::system_clock::now();
+    auto elapsed = end - start;
+    std::cout << "raskMinkstus(): " << (double)elapsed.count()/10000000 << "s." << std::endl;
+
+    return minksti;  // grąžina studentus gavusius skolą
+}
+
+std::vector<studentas> iterpkKietus(std::vector<studentas>& studentai) {
+    auto start = std::chrono::system_clock::now();
+
+    std::vector<studentas>::size_type count = 0;
+    std::vector<studentas>::size_type i = 0;
+    while (i != studentai.size()) {
+        if (getResult(studentai[i],false) < 5) {
+            studentai.insert(studentai.begin(),studentai[i]);
+            i++;
+            count++;
+        } else
+            ++i;  // pereiti prie kito studento
+    }
+    studentai.resize(count);
+    studentai.shrink_to_fit();
+
+    auto end = std::chrono::system_clock::now();
+    auto elapsed = end - start;
+    std::cout << "iterpkKietus(): " << (double)elapsed.count()/10000000 << "s." << std::endl;
+
+    return studentai;
+}
+
 std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int amount) {
     int strategy = 0;
-    std::cout << "Pasirinkite strategija (1-3):\n1. Pirma strategija\n2. Antra strategija\n3. Optimizuota strategija.\n";
+    std::cout << "Pasirinkite strategija (1-4):\n1. Pirma strategija\n2. Antra strategija\n3. Optimizuota strategija.\n4. Papildomos uzduoties strategija\n";
     std::cin >> strategy;
     checkInput();
     if(strategy == 2){
         std::cout << "Pasirinkta antra strategija" << std::endl;
     }else if(strategy == 3){
         std::cout << "Pasirinkta trecia strategija" << std::endl;
+    }else if(strategy == 4){
+        std::cout << "Pasirinkta ketvirta strategija" << std::endl;
     }else {
         std::cout << "Pasirinkta pirma strategija" << std::endl;
     }
@@ -229,6 +276,11 @@ std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int
         users.erase(std::remove_if(users.begin(), users.end(), [](const studentas &a1){
                         return getResult(a1,false) < 5;
                     }), users.end());
+    }
+
+    if(strategy == 4) {
+        nuskriaustukai = raskMinkstus(users);
+        users = iterpkKietus(users);
     }
 
     auto end = std::chrono::system_clock::now();

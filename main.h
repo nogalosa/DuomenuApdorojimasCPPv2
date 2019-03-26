@@ -15,7 +15,6 @@
 #include <algorithm>
 #include <chrono>
 #include <random>
-#include <vector>
 #include "RandInt.h"
 
 struct studentas {
@@ -31,6 +30,8 @@ studentas getUserInfo();
 void showResults(std::vector<studentas> users, bool median);
 double getResult(studentas stud, bool median);
 std::vector<studentas> regenerateResults(std::vector<studentas> users);
+std::vector<studentas> raskMinkstus(std::vector<studentas>& studentai);
+std::vector<studentas> iterpkKietus(std::vector<studentas>& studentai);
 std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int amount);
 std::vector<studentas> loadStudents(std::vector<studentas> users);
 std::vector<studentas> generationMenu(std::vector<studentas> users);

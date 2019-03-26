@@ -38,6 +38,10 @@ How many students are added to `users` vector on sixth menu selection depends on
 
 ___
 
+__Additional Task Changelog:__
+* Added Additional Task generation strategy with `raskMinkstus()` and `iterpkKietus()` functions;
+* Benchmarked it with vector and deque containers.
+
 __v1.0 Changelog:__
 * Remade Deque system to Vector system;
 * Updated random number generation method;
@@ -78,6 +82,16 @@ __v0.1 Changelog:__
 * Initial release.
 
 ___
+
+__Additional Task Benchmarks:__
+
+Results show how much time (seconds) did `raskMinkstus()` and `iterpkKietus()` functions take to execute.
+
+| Type \ Student count | 10 000 | 100 000 |
+| :---: | :---: | :---: |
+| Vector | 26.5866 / 0.0856295 | 1911.1 / 0.894586 |
+| Deque | 8.2786 / 0.241168 | 798.89 / 2.62829 |
+
 __v1.0 Benchmarks:__
 
 1 000 students generation time in seconds. First strategy puts every student to main `users` vector and to vectors called `nuskriaustukai` and `galvociai` depending on what marks do they get. Second strategy puts students with better marks to `users` vector, and with lower marks directly to `nuskriaustukai` vector. The third strategy puts students directly to `users` array and after that it is sorted to `users` and `nuskriaustukai` depending on their marks.
