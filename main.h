@@ -16,24 +16,19 @@
 #include <chrono>
 #include <random>
 #include "RandInt.h"
-
-struct studentas {
-    std::string name, surname;
-    int egz;
-    std::vector<int> nd;
-};
+#include "Studentas.h"
 
 void checkInput();
-std::vector<studentas> sortByNd(std::vector<studentas> users, bool chrono);
-std::vector<studentas> sortByName(std::vector<studentas> users);
-studentas getUserInfo();
-void showResults(std::vector<studentas> users, bool median);
-double getResult(studentas stud, bool median);
-std::vector<studentas> regenerateResults(std::vector<studentas> users);
-std::vector<studentas> raskMinkstus(std::vector<studentas>& studentai);
-std::vector<studentas> iterpkKietus(std::vector<studentas>& studentai);
-std::vector<studentas> generateStudentsAndLoad(std::vector<studentas> users, int amount);
-std::vector<studentas> loadStudents(std::vector<studentas> users);
-std::vector<studentas> generationMenu(std::vector<studentas> users);
+std::vector<Studentas> sortByNd(std::vector<Studentas> users, bool chrono);
+std::vector<Studentas> sortByName(std::vector<Studentas> users);
+Studentas getUserInfo();
+void showResults(std::vector<Studentas> users, bool median);
+double getResult(Studentas stud, bool median);
+std::vector<Studentas> regenerateResults(std::vector<Studentas> users);
+std::vector<Studentas> raskMinkstus(std::vector<Studentas>& studentai);
+std::vector<Studentas> iterpkKietus(std::vector<Studentas>& studentai);
+std::vector<Studentas> generateStudentsAndLoad(std::vector<Studentas> users, int amount);
+std::vector<Studentas> loadStudents(std::vector<Studentas> users);
+std::vector<Studentas> generationMenu(std::vector<Studentas> users);
 
 #endif //DUOMENUAPDOROJIMASCPP_MAIN_H

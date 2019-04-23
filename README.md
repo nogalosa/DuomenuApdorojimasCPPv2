@@ -10,7 +10,7 @@ Pagal [/objprog/paskaitos2019/wiki/2-oji-užduotis](https://github.com/objprog/p
 
 ___
 
-__How to run:__
+### Running the program
 * Compile program with cmake using CMakeLists.txt file;
 * If you want to load data from file, create kursiokai.txt with information you want to input and place it in the same directory as launch file. File ex.:
 ```
@@ -23,7 +23,7 @@ Vardas2     Pavardė2    7    10    8    5    4    6
 
 ___
 
-__Using the program:__
+### Using the program
 
 The program displays a menu when opened.
 You can:
@@ -37,6 +37,13 @@ You can:
 How many students are added to `users` vector on sixth menu selection depends on selected strategy.
 
 ___
+
+### Changelog
+
+__v1.1 Changelog:__
+* Remade Studentas structure to class;
+* Now using getters and setters to manipulate data;
+* Benchmarked with `O1`, `O2`, `O3` flags and compared to last release. 
 
 __Additional Task Changelog:__
 * Added Additional Task generation strategy with `raskMinkstus()` and `iterpkKietus()` functions;
@@ -82,6 +89,22 @@ __v0.1 Changelog:__
 * Initial release.
 
 ___
+
+### Benchmarks
+
+__v1.1 Benchmarks:__
+
+1 000 students generation time in seconds. (Time is benchmarked with writing to file to compare with previous benchmarks)
+
+| Type \ Strategy | 1 | 2 | 3 |
+| :---: | :---: | :---: | :---: |
+| Structure | 0.139039 | 0.219113 | 0.318443 |
+| Class | 0.198103 | 0.182019 | 0.282342 |
+| Class (-O1) | 0.182106 | 0.176346 | 0.274062 |
+| Class (-O2) | 0.189386 | 0.180225 | 0.280019 |
+| Class (-O3) | 0.182609 | 0.179780 | 0.282350 |
+
+#### Older benchmarks (up to v1.0)
 
 __Additional Task Benchmarks:__
 
