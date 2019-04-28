@@ -40,6 +40,9 @@ ___
 
 ### Changelog
 
+__v1.2 Changelog:__
+* Added deconstructor and two object copy methods (with `=` operator and constructor) for Studentas class.
+
 __v1.1 Changelog:__
 * Remade Studentas structure to class;
 * Now using getters and setters to manipulate data;
