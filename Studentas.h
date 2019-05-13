@@ -7,19 +7,22 @@
 
 #include <iostream>
 #include <vector>
+#include "Asmuo.h"
 
-class Studentas {
+class Studentas : public Asmuo {
 private:
-    std::string name, surname;
     int egz;
     std::vector<int> nd;
 
 public:
 
-    Studentas() : egz(0), name(""), surname("") { }
-    Studentas(std::string name, std::string surname, int egz, std::vector<int> nd) : name(name), surname(surname), egz(egz) { }
+    Studentas() : egz(0) { Asmuo::name = ""; Asmuo::surname = ""; }
+    Studentas(std::string n, std::string s, int egz, std::vector<int> nd) : egz(egz) { name = n;
+        surname = s;}
     ~Studentas(){}
-    Studentas (const Studentas& x) : name(x.getName()), surname(x.getSurname()), egz(x.getEgz()) {
+    Studentas (const Studentas& x) : egz(x.getEgz()) {
+        name = x.getName();
+        surname = x.getSurname();
         nd.reserve(x.getNd().size());
         for(int nds : x.getNd()) {
             nd.push_back(nds);

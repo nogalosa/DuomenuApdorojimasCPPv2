@@ -40,6 +40,9 @@ ___
 
 ### Changelog
 
+__v1.5 Changelog:__
+* Studentas class now has base class called Asmuo.
+
 __v1.2 Changelog:__
 * Added deconstructor and two object copy methods (with `=` operator and constructor) for Studentas class.
 
