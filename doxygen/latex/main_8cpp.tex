@@ -1,0 +1,203 @@
+\hypertarget{main_8cpp}{}\section{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.cpp@{main.cpp}}
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_a7117e2fd5fc85ba3dd7eefbb7b974c81}{check\+Input}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \mbox{\hyperlink{main_8cpp_ab87968d2247d077073e337b528aa3ae5}{sort\+By\+Nd}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ users, bool chrono)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \mbox{\hyperlink{main_8cpp_a0f64d268cddfe30cd99e0405f8cf07fc}{sort\+By\+Name}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ users)
+\item 
+\mbox{\hyperlink{class_studentas}{Studentas}} \mbox{\hyperlink{main_8cpp_af4b90c20a95377b1f9cda3a3b4613d83}{get\+User\+Info}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_ab3f14b2c18a5bafbbbdf16957f8f69ab}{show\+Results}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ users, bool median)
+\item 
+double \mbox{\hyperlink{main_8cpp_a51ec51eed9c7cf4620fa04528b6192f1}{get\+Result}} (\mbox{\hyperlink{class_studentas}{Studentas}} stud, bool median)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \mbox{\hyperlink{main_8cpp_ae762b70ddc261a88eff3645d95459579}{regenerate\+Results}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ users)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \mbox{\hyperlink{main_8cpp_a225b9876f074b8ecbe01fd6677c28daa}{rask\+Minkstus}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&studentai)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \mbox{\hyperlink{main_8cpp_a722ff3f683bf425a535be93e8bd2fa7e}{iterpk\+Kietus}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&studentai)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \mbox{\hyperlink{main_8cpp_ade4ea20604162bd20bb974137a3cfb58}{generate\+Students\+And\+Load}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ users, int amount)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \mbox{\hyperlink{main_8cpp_a96a2ca8c12d607a24cdf45e0ef80a374}{load\+Students}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ users)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \mbox{\hyperlink{main_8cpp_aedf99e5a014c48c59740cc2ec1c9631a}{generation\+Menu}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ users)
+\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_a7117e2fd5fc85ba3dd7eefbb7b974c81}\label{main_8cpp_a7117e2fd5fc85ba3dd7eefbb7b974c81}} 
+\index{main.cpp@{main.cpp}!checkInput@{checkInput}}
+\index{checkInput@{checkInput}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{checkInput()}{checkInput()}}
+{\footnotesize\ttfamily void check\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Check cin for bad input \mbox{\Hypertarget{main_8cpp_ade4ea20604162bd20bb974137a3cfb58}\label{main_8cpp_ade4ea20604162bd20bb974137a3cfb58}} 
+\index{main.cpp@{main.cpp}!generateStudentsAndLoad@{generateStudentsAndLoad}}
+\index{generateStudentsAndLoad@{generateStudentsAndLoad}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{generateStudentsAndLoad()}{generateStudentsAndLoad()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_studentas}{Studentas}}$>$ generate\+Students\+And\+Load (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$}]{users,  }\item[{int}]{amount }\end{DoxyParamCaption})}
+
+Main automatic students generation function which requires some userr input for selecting a generating strategy
+
+
+\begin{DoxyParams}{Parameters}
+{\em users} & Users vector (can be empty one) \\
+\hline
+{\em amount} & How many Students to generate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+users vector with added new generated Students. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_aedf99e5a014c48c59740cc2ec1c9631a}\label{main_8cpp_aedf99e5a014c48c59740cc2ec1c9631a}} 
+\index{main.cpp@{main.cpp}!generationMenu@{generationMenu}}
+\index{generationMenu@{generationMenu}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{generationMenu()}{generationMenu()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_studentas}{Studentas}}$>$ generation\+Menu (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$}]{users }\end{DoxyParamCaption})}
+
+A pre-\/function for generate\+Student\+And\+Load() function for selecting how many Students the user wants to generate.
+
+
+\begin{DoxyParams}{Parameters}
+{\em users} & Users vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+users vector with added new generated Students. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_a51ec51eed9c7cf4620fa04528b6192f1}\label{main_8cpp_a51ec51eed9c7cf4620fa04528b6192f1}} 
+\index{main.cpp@{main.cpp}!getResult@{getResult}}
+\index{getResult@{getResult}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{getResult()}{getResult()}}
+{\footnotesize\ttfamily double get\+Result (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_studentas}{Studentas}}}]{stud,  }\item[{bool}]{median }\end{DoxyParamCaption})}
+
+Get result for one student.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stud} & Student to calculate. \\
+\hline
+{\em median} & To use Median or Mathematic average method for counting their average result. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Result. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_af4b90c20a95377b1f9cda3a3b4613d83}\label{main_8cpp_af4b90c20a95377b1f9cda3a3b4613d83}} 
+\index{main.cpp@{main.cpp}!getUserInfo@{getUserInfo}}
+\index{getUserInfo@{getUserInfo}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{getUserInfo()}{getUserInfo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_studentas}{Studentas}} get\+User\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Function for gathering information about new Student using live console input.
+
+\begin{DoxyReturn}{Returns}
+Generated Student. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_a722ff3f683bf425a535be93e8bd2fa7e}\label{main_8cpp_a722ff3f683bf425a535be93e8bd2fa7e}} 
+\index{main.cpp@{main.cpp}!iterpkKietus@{iterpkKietus}}
+\index{iterpkKietus@{iterpkKietus}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{iterpkKietus()}{iterpkKietus()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_studentas}{Studentas}}$>$ iterpk\+Kietus (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{studentai }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a96a2ca8c12d607a24cdf45e0ef80a374}\label{main_8cpp_a96a2ca8c12d607a24cdf45e0ef80a374}} 
+\index{main.cpp@{main.cpp}!loadStudents@{loadStudents}}
+\index{loadStudents@{loadStudents}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{loadStudents()}{loadStudents()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_studentas}{Studentas}}$>$ load\+Students (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$}]{users }\end{DoxyParamCaption})}
+
+Load students from kursiokai.\+txt
+
+
+\begin{DoxyParams}{Parameters}
+{\em users} & Users vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated users vector with inserted values from the file. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a225b9876f074b8ecbe01fd6677c28daa}\label{main_8cpp_a225b9876f074b8ecbe01fd6677c28daa}} 
+\index{main.cpp@{main.cpp}!raskMinkstus@{raskMinkstus}}
+\index{raskMinkstus@{raskMinkstus}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{raskMinkstus()}{raskMinkstus()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_studentas}{Studentas}}$>$ rask\+Minkstus (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{studentai }\end{DoxyParamCaption})}
+
+minkštus studentus nukopijuoja į naują vektorių ir ištrina iš seno \mbox{\Hypertarget{main_8cpp_ae762b70ddc261a88eff3645d95459579}\label{main_8cpp_ae762b70ddc261a88eff3645d95459579}} 
+\index{main.cpp@{main.cpp}!regenerateResults@{regenerateResults}}
+\index{regenerateResults@{regenerateResults}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{regenerateResults()}{regenerateResults()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_studentas}{Studentas}}$>$ regenerate\+Results (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$}]{users }\end{DoxyParamCaption})}
+
+To randomize nd param values.
+
+
+\begin{DoxyParams}{Parameters}
+{\em users} & Students list. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Regenerated Students list. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_ab3f14b2c18a5bafbbbdf16957f8f69ab}\label{main_8cpp_ab3f14b2c18a5bafbbbdf16957f8f69ab}} 
+\index{main.cpp@{main.cpp}!showResults@{showResults}}
+\index{showResults@{showResults}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{showResults()}{showResults()}}
+{\footnotesize\ttfamily void show\+Results (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$}]{users,  }\item[{bool}]{median }\end{DoxyParamCaption})}
+
+Calculate and print users\textquotesingle{} results to console.
+
+
+\begin{DoxyParams}{Parameters}
+{\em users} & Users to calculate and print. \\
+\hline
+{\em median} & To use Median or Mathematic average method for counting their average result. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a0f64d268cddfe30cd99e0405f8cf07fc}\label{main_8cpp_a0f64d268cddfe30cd99e0405f8cf07fc}} 
+\index{main.cpp@{main.cpp}!sortByName@{sortByName}}
+\index{sortByName@{sortByName}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{sortByName()}{sortByName()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_studentas}{Studentas}}$>$ sort\+By\+Name (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$}]{users }\end{DoxyParamCaption})}
+
+Sort users by their name.
+
+
+\begin{DoxyParams}{Parameters}
+{\em users} & User list you want to sort. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Sorted list. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_ab87968d2247d077073e337b528aa3ae5}\label{main_8cpp_ab87968d2247d077073e337b528aa3ae5}} 
+\index{main.cpp@{main.cpp}!sortByNd@{sortByNd}}
+\index{sortByNd@{sortByNd}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{sortByNd()}{sortByNd()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_studentas}{Studentas}}$>$ sort\+By\+Nd (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$}]{users,  }\item[{bool}]{chrono }\end{DoxyParamCaption})}
+
+Sort users by their nd param.
+
+
+\begin{DoxyParams}{Parameters}
+{\em users} & User list you want to sort. \\
+\hline
+{\em chrono} & True if you want to do benchmarking. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Sorted list. 
+\end{DoxyReturn}

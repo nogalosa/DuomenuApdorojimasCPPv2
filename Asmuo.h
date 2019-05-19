@@ -11,6 +11,12 @@ class Asmuo {
 protected:
     std::string name;
     std::string surname;
+
+public:
+    std::string getName() const { return name; }
+    std::string getSurname() const { return surname; }
+    void setName(std::string name) { Asmuo::name = name; }
+    void setSurname(std::string surname) { Asmuo::surname = surname; }
 };
 
 #endif //DUOMENUAPDOROJIMASCPP_ASMUO_H

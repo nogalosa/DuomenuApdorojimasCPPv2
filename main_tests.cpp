@@ -1,4 +1,6 @@
+#define CATCH_CONFIG_MAIN
 #include "main.h"
+#include "catch.h"
 
 /**
  * Check cin for bad input
@@ -441,59 +443,23 @@ std::vector<Studentas> generationMenu(std::vector<Studentas> users){
     }
 }
 
-int main() {
+TEST_CASE( "Check if Studentas class works as it intended", "[Studentas]" ) {
 
-//    std::random_device rd;
-//    std::mt19937 mt(rd());
-//    std::uniform_int_distribution<int> dist(0, 99);
-//    for(int i = 0; i < 16, i++){
-//        std::cout << dist(mt) << " ";
-//    }
-//    std::cout << dist(mt) << " ";
+    Studentas stud;
 
-    std::vector<Studentas> users;
-    int selection = 1;
-    while(selection == 1){
-        std::cout << "Ivesta " << users.size() << " stud. Pasirinkite:" << std::endl;
-        std::cout << "1. Ivesti nauja studenta;" << std::endl;
-        std::cout << "2. Suskaiciuoti galutinius balus (su vidurkiu);" << std::endl;
-        std::cout << "3. Suskaiciuoti galutinius balus (su mediana);" << std::endl;
-        std::cout << "4. Pergeneruoti visu ivestu studentu namu darbu balus i atsitiktinius;" << std::endl;
-        std::cout << "5. Ivesti studentu informacija is kursiokai.txt failo;" << std::endl;
-        std::cout << "6. Sugeneruoti tam tikra skaiciu studentu, juos ikelti i programa ir isaugoti failuose;" << std::endl;
-        std::cin >> selection;
-        checkInput();
+    REQUIRE( stud.getNd().size() == 0 );
 
+    SECTION( "Setting new name and surname" ) {
+        stud.setName("Testas");
+        stud.setSurname("Testavičius");
 
-        switch(selection) {
-            case 1:
-                users.push_back(getUserInfo());
-                break;
-            case 2:
-                showResults(sortByName(users),false);
-                break;
-            case 3:
-                showResults(sortByName(users),true);
-                break;
-            case 4:
-                users = regenerateResults(users);
-                selection = 1;
-                break;
-            case 5:
-                users = loadStudents(users);
-                selection = 1;
-                break;
-            case 6:
-                users = generationMenu(users);
-                selection = 1;
-                break;
-            default:
-                std::cout << "Ivestas neteisingas pasirinkimas" << std::endl << std::endl;
-                selection = 1;
-                break;
-        }
+        REQUIRE( stud.getName() == "Testas");
+        REQUIRE( stud.getSurname() == "Testavičius");
     }
+    SECTION( "Adding new nd value" ) {
+        stud.addNd(1);
 
-
-    return 0;
+        REQUIRE( stud.getNd().size() == 1 );
+        REQUIRE( stud.getNd()[0] == 1 );
+    }
 }

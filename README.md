@@ -1,10 +1,10 @@
 Duomenu Apdorojimas
 ===================
 
-[![Commit activity](https://img.shields.io/github/commit-activity/w/nogalosa/DuomenuApdorojimasCPP.svg)](https://github.com/nogalosa/DuomenuApdorojimasCPP/commits/master)
-[![Last commit](https://img.shields.io/github/last-commit/nogalosa/DuomenuApdorojimasCPP.svg)](https://github.com/nogalosa/DuomenuApdorojimasCPP/commits/master)
-[![Repo size](https://img.shields.io/github/repo-size/nogalosa/DuomenuApdorojimasCPP.svg)](https://github.com/nogalosa/DuomenuApdorojimasCPP/commits/master)
-[![Release](https://img.shields.io/github/release/nogalosa/DuomenuApdorojimasCPP.svg)](https://github.com/nogalosa/DuomenuApdorojimasCPP/commits/master)
+[![Commit activity](https://img.shields.io/github/commit-activity/w/nogalosa/DuomenuApdorojimasCPPv2.svg)](https://github.com/nogalosa/DuomenuApdorojimasCPP/commits/master)
+[![Last commit](https://img.shields.io/github/last-commit/nogalosa/DuomenuApdorojimasCPPv2.svg)](https://github.com/nogalosa/DuomenuApdorojimasCPP/commits/master)
+[![Repo size](https://img.shields.io/github/repo-size/nogalosa/DuomenuApdorojimasCPPv2.svg)](https://github.com/nogalosa/DuomenuApdorojimasCPP/commits/master)
+[![Release](https://img.shields.io/github/release/nogalosa/DuomenuApdorojimasCPPv2.svg)](https://github.com/nogalosa/DuomenuApdorojimasCPP/commits/master)
 
 Pagal [/objprog/paskaitos2019/wiki/2-oji-užduotis](https://github.com/objprog/paskaitos2019/wiki/2-oji-u%C5%BEduotis) atliekama užduotis.
 
@@ -39,6 +39,10 @@ How many students are added to `users` vector on sixth menu selection depends on
 ___
 
 ### Changelog
+
+__v2.0 Changelog:__
+* Added documentation (doxygen);
+* Unit testing with Catch in `main_tests` class.
 
 __v1.5 Changelog:__
 * Studentas class now has base class called Asmuo.

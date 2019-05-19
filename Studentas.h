@@ -29,12 +29,8 @@ public:
         }
     }
 
-    std::string getName() const { return name; }
-    std::string getSurname() const { return surname; }
     int getEgz() const { return egz; }
     std::vector<int> getNd() const { return nd; }
-    void setName(std::string name) { Studentas::name = name; }
-    void setSurname(std::string surname) { Studentas::surname = surname; }
     void setEgz(int egz) { Studentas::egz = egz; }
     void addNd(int ndn) { nd.push_back(ndn); }
     void setNd(int index, int ndn) { nd[index] = ndn; }
