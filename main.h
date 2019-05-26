@@ -9,7 +9,7 @@
 #include <iomanip>
 #include <string>
 #include <cassert>
-#include <vector>
+#include "NVector.h"
 #include <stdio.h>
 #include <fstream>
 #include <algorithm>
@@ -19,16 +19,16 @@
 #include "Studentas.h"
 
 void checkInput();
-std::vector<Studentas> sortByNd(std::vector<Studentas> users, bool chrono);
-std::vector<Studentas> sortByName(std::vector<Studentas> users);
+NVector<Studentas> sortByNd(NVector<Studentas> users, bool chrono);
+NVector<Studentas> sortByName(NVector<Studentas> users);
 Studentas getUserInfo();
-void showResults(std::vector<Studentas> users, bool median);
+void showResults(NVector<Studentas> users, bool median);
 double getResult(Studentas stud, bool median);
-std::vector<Studentas> regenerateResults(std::vector<Studentas> users);
-std::vector<Studentas> raskMinkstus(std::vector<Studentas>& studentai);
-std::vector<Studentas> iterpkKietus(std::vector<Studentas>& studentai);
-std::vector<Studentas> generateStudentsAndLoad(std::vector<Studentas> users, int amount);
-std::vector<Studentas> loadStudents(std::vector<Studentas> users);
-std::vector<Studentas> generationMenu(std::vector<Studentas> users);
+NVector<Studentas> regenerateResults(NVector<Studentas> users);
+NVector<Studentas> raskMinkstus(NVector<Studentas>& studentai);
+NVector<Studentas> iterpkKietus(NVector<Studentas>& studentai);
+NVector<Studentas> generateStudentsAndLoad(NVector<Studentas> users, int amount);
+NVector<Studentas> loadStudents(NVector<Studentas> users);
+NVector<Studentas> generationMenu(NVector<Studentas> users);
 
 #endif //DUOMENUAPDOROJIMASCPP_MAIN_H

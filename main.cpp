@@ -17,7 +17,7 @@ void checkInput(){
  * @param chrono True if you want to do benchmarking.
  * @return Sorted list.
  */
-std::vector<Studentas> sortByNd(std::vector<Studentas> users, bool chrono) {
+NVector<Studentas> sortByNd(NVector<Studentas> users, bool chrono) {
     auto start = std::chrono::system_clock::now();
     int i, j, k;
     for (auto user : users)
@@ -38,10 +38,10 @@ std::vector<Studentas> sortByNd(std::vector<Studentas> users, bool chrono) {
  * @param users User list you want to sort.
  * @return Sorted list.
  */
-std::vector<Studentas> sortByName(std::vector<Studentas> users) {
-    std::sort(std::begin(users), std::end(users), [](const Studentas &a1, const Studentas &a2 ){
-        return a1.getName().compare(a2.getName()) < 0;
-    });
+NVector<Studentas> sortByName(NVector<Studentas> users) {
+//    std::sort(std::begin(users), std::end(users), [](const Studentas &a1, const Studentas &a2 ){
+//        return a1.getName().compare(a2.getName()) < 0;
+//    });
 //    users.sort([](Studentas const a, Studentas const  b) {return a.name.compare(b.name) < 0;});
     return users;
 }
@@ -104,7 +104,7 @@ Studentas getUserInfo() {
  * @param users Users to calculate and print.
  * @param median To use Median or Mathematic average method for counting their average result.
  */
-void showResults(std::vector<Studentas> users, bool median) {
+void showResults(NVector<Studentas> users, bool median) {
     int longestName = 0, longestSurname = 0;
     for (auto user : users) {
         if(user.getName().size() > longestName)
@@ -158,7 +158,7 @@ void showResults(std::vector<Studentas> users, bool median) {
  * @return Result.
  */
 double getResult(Studentas stud, bool median){
-    std::vector<Studentas> users;
+    NVector<Studentas> users;
     users.push_back(stud);
     double imedian, galutinis,suma = 0;
     if(median) {
@@ -184,7 +184,7 @@ double getResult(Studentas stud, bool median){
  * @param users Students list.
  * @return Regenerated Students list.
  */
-std::vector<Studentas> regenerateResults(std::vector<Studentas> users) {
+NVector<Studentas> regenerateResults(NVector<Studentas> users) {
     auto start = std::chrono::system_clock::now();
     RandInt rnd {0, 9};
     for(auto user : users){
@@ -201,11 +201,11 @@ std::vector<Studentas> regenerateResults(std::vector<Studentas> users) {
 /**
  * minkštus studentus nukopijuoja į naują vektorių ir ištrina iš seno
  */
-std::vector<Studentas> raskMinkstus(std::vector<Studentas>& studentai) {
+NVector<Studentas> raskMinkstus(NVector<Studentas>& studentai) {
     auto start = std::chrono::system_clock::now();
 
-    std::vector<Studentas> minksti;
-    std::vector<Studentas>::size_type i = 0;
+    NVector<Studentas> minksti;
+    NVector<Studentas>::size_type i = 0;
     // invariantas: vektoriaus `studentai` elementai [0, i) yra "kieti"
     while (i != studentai.size()) {
         if (getResult(studentai[i],false) < 5) {
@@ -222,11 +222,11 @@ std::vector<Studentas> raskMinkstus(std::vector<Studentas>& studentai) {
     return minksti;  // grąžina studentus gavusius skolą
 }
 
-std::vector<Studentas> iterpkKietus(std::vector<Studentas>& studentai) {
+NVector<Studentas> iterpkKietus(NVector<Studentas>& studentai) {
     auto start = std::chrono::system_clock::now();
 
-    std::vector<Studentas>::size_type count = 0;
-    std::vector<Studentas>::size_type i = 0;
+    NVector<Studentas>::size_type count = 0;
+    NVector<Studentas>::size_type i = 0;
     while (i != studentai.size()) {
         if (getResult(studentai[i],false) < 5) {
             studentai.insert(studentai.begin(),studentai[i]);
@@ -252,7 +252,7 @@ std::vector<Studentas> iterpkKietus(std::vector<Studentas>& studentai) {
  * @param amount How many Students to generate
  * @return users vector with added new generated Students.
  */
-std::vector<Studentas> generateStudentsAndLoad(std::vector<Studentas> users, int amount) {
+NVector<Studentas> generateStudentsAndLoad(NVector<Studentas> users, int amount) {
     int strategy = 0;
     std::cout << "Pasirinkite strategija (1-4):\n1. Pirma strategija\n2. Antra strategija\n3. Optimizuota strategija.\n4. Papildomos uzduoties strategija\n";
     std::cin >> strategy;
@@ -271,8 +271,8 @@ std::vector<Studentas> generateStudentsAndLoad(std::vector<Studentas> users, int
     auto start = std::chrono::system_clock::now();
     RandInt rnd {0, 9};
 
-    std::vector<Studentas> nuskriaustukai;
-    std::vector<Studentas> galvociai;
+    NVector<Studentas> nuskriaustukai;
+    NVector<Studentas> galvociai;
 
     std::ofstream osless("nuskriaustukai.txt");
     std::ofstream osmore("galvociai.txt");
@@ -320,7 +320,7 @@ std::vector<Studentas> generateStudentsAndLoad(std::vector<Studentas> users, int
 
     if(strategy == 3) {
         remove_copy_if(users.begin(), users.end(),
-                       back_inserter(nuskriaustukai), [](const Studentas &a1){
+                       nuskriaustukai.back_inserter(nuskriaustukai), [](const Studentas &a1){
                     return getResult(a1,false) >= 5;
                 });
         users.erase(std::remove_if(users.begin(), users.end(), [](const Studentas &a1){
@@ -346,7 +346,7 @@ std::vector<Studentas> generateStudentsAndLoad(std::vector<Studentas> users, int
  * @param users Users vector
  * @return Updated users vector with inserted values from the file.
  */
-std::vector<Studentas> loadStudents(std::vector<Studentas> users) {
+NVector<Studentas> loadStudents(NVector<Studentas> users) {
     try {
         std::ifstream inf("kursiokai.txt");
 
@@ -401,7 +401,7 @@ std::vector<Studentas> loadStudents(std::vector<Studentas> users) {
  * @param users Users vector
  * @return users vector with added new generated Students.
  */
-std::vector<Studentas> generationMenu(std::vector<Studentas> users){
+NVector<Studentas> generationMenu(NVector<Studentas> users){
     int selection = 0;
     while(selection == 0){
         std::cout << "Pasirinkite, kiek studentu norite sugeneruoti:" << std::endl;
@@ -451,7 +451,7 @@ int main() {
 //    }
 //    std::cout << dist(mt) << " ";
 
-    std::vector<Studentas> users;
+    NVector<Studentas> users;
     int selection = 1;
     while(selection == 1){
         std::cout << "Ivesta " << users.size() << " stud. Pasirinkite:" << std::endl;
