@@ -39,9 +39,9 @@ NVector<Studentas> sortByNd(NVector<Studentas> users, bool chrono) {
  * @return Sorted list.
  */
 NVector<Studentas> sortByName(NVector<Studentas> users) {
-//    std::sort(std::begin(users), std::end(users), [](const Studentas &a1, const Studentas &a2 ){
-//        return a1.getName().compare(a2.getName()) < 0;
-//    });
+    std::sort(users.begin(), users.end(), [](const Studentas &a1, const Studentas &a2 ){
+        return a1.getName().compare(a2.getName()) < 0;
+    });
 //    users.sort([](Studentas const a, Studentas const  b) {return a.name.compare(b.name) < 0;});
     return users;
 }
@@ -454,7 +454,7 @@ int main() {
     NVector<Studentas> users;
     int selection = 1;
     while(selection == 1){
-        std::cout << "Ivesta " << users.size() << " stud. Pasirinkite:" << std::endl;
+        std::cout << "Ivesta " << users.size() << " stud. (Cap: " << users.capacity() << ") Pasirinkite:" << std::endl;
         std::cout << "1. Ivesti nauja studenta;" << std::endl;
         std::cout << "2. Suskaiciuoti galutinius balus (su vidurkiu);" << std::endl;
         std::cout << "3. Suskaiciuoti galutinius balus (su mediana);" << std::endl;

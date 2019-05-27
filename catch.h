@@ -601,8 +601,8 @@ auto c_str() const -> char const*;
 public: // substrings and searches
 auto substr( size_type start, size_type size ) const noexcept -> StringRef;
 
-// Returns the current start pointer.
-// Note that the pointer can change when if the StringRef is a substring
+// Returns the current start ptr.
+// Note that the ptr can change when if the StringRef is a substring
 auto currentData() const noexcept -> char const*;
 
 private: // ownership queries - may not be consistent between calls
@@ -5269,7 +5269,7 @@ void assertionStarting(AssertionInfo const&) override {}
 
 bool assertionEnded(AssertionStats const& assertionStats) override {
 assert(!m_sectionStack.empty());
-// AssertionResult holds a pointer to a temporary DecomposedExpression,
+// AssertionResult holds a ptr to a temporary DecomposedExpression,
 // which getExpandedExpression() calls to build the expression string.
 // Our section stack copy of the assertionResult will likely outlive the
 // temporary, so it must be expanded or discarded now to avoid calling
@@ -8009,7 +8009,7 @@ bool SourceLineInfo::operator == ( SourceLineInfo const& other ) const noexcept 
 return line == other.line && (file == other.file || std::strcmp(file, other.file) == 0);
 }
 bool SourceLineInfo::operator < ( SourceLineInfo const& other ) const noexcept {
-// We can assume that the same file will usually have the same pointer.
+// We can assume that the same file will usually have the same ptr.
 // Thus, if the pointers are the same, there is no point in calling the strcmp
 return line < other.line || ( line == other.line && file != other.file && (std::strcmp(file, other.file) < 0));
 }
@@ -10902,7 +10902,7 @@ return createReporter(config->getReporterName(), config);
 // when the return type is std::unique_ptr<IStreamingReporter>
 // doesn't compile without a std::move call. However, this causes
 // a warning on newer platforms. Thus, we have to work around
-// it a bit and downcast the pointer manually.
+// it a bit and downcast the ptr manually.
 auto ret = std::unique_ptr<IStreamingReporter>(new ListeningReporter);
 auto& multi = static_cast<ListeningReporter&>(*ret);
 auto const& listeners = Catch::getRegistryHub().getReporterRegistry().getListeners();
