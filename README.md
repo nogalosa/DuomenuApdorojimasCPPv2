@@ -40,6 +40,10 @@ ___
 
 ### Changelog
 
+__v2.0.1 Changelog:__
+* Std::vector changed to NVector;
+* Fixed abstract Asmuo class.
+
 __v2.0 Changelog:__
 * Added documentation (doxygen);
 * Unit testing with Catch in `main_tests` class.
