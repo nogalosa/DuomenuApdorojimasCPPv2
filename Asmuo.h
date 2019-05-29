@@ -17,6 +17,7 @@ public:
     std::string getSurname() const { return surname; }
     void setName(std::string name) { Asmuo::name = name; }
     void setSurname(std::string surname) { Asmuo::surname = surname; }
+    virtual int getEgz() const = 0;
 };
 
 #endif //DUOMENUAPDOROJIMASCPP_ASMUO_H

@@ -10,7 +10,7 @@ template <class T>
 class NVector {
 private:
     T* element;
-    int _size, _capacity;
+    int _size, _capacity, _cap_moves = 0;
 public:
     using size_type = std::size_t;
     using value_type = T;
@@ -35,7 +35,9 @@ public:
     T& back();
 
     int size() const { return _size; }
-    int capacity() const { return _capacity;}
+    int capacity() const { return _capacity; }
+    int cap_moves() const { return _cap_moves; }
+    size_t max_size() const;
 
     bool empty() const;
 
@@ -153,6 +155,11 @@ NVector<T> operator+(const NVector<T>& a, const NVector<T>& b) {
     NVector<T> c(a.size());
     for (auto i = 0; i != a.size(); ++i) c[i] = a[i] + b[i];
     return c;
+}
+
+template <class T>
+size_t NVector<T>::max_size() const {
+    return std::numeric_limits<size_type>::max();
 }
 
 template<class T>
@@ -284,6 +291,7 @@ void NVector<T>::push_back(const T &val) {
     if(_size >= _capacity)
     {
         resize(std::max(2 * _size, 1));
+        _cap_moves++;
     }
     element[_size] = val;
     _size++;
